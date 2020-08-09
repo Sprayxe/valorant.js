@@ -6,6 +6,7 @@ class ValorantClient {
     this.killedToken = false;
     this.Endpoints = URLS;
     this.config = config;
+    this.profile = null;
   }
 }
 
