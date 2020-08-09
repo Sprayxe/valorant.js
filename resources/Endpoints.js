@@ -8,12 +8,12 @@ module.exports = Object.freeze({
 
   EUBASE: "https://pd.eu.a.pvp.net",
 
-  ASIABASE: "https://pd.ap.a.pvp.net",
+  APBASE: "https://pd.ap.a.pvp.net",
 
   NASHARED: "https://shared.na.a.pvp.net",
 
   EUSHARED: "https://shared.eu.a.pvp.net",
 
-  ASIASHARED: "https://shared.ap.a.pvp.net",
+  APSHARED: "https://shared.ap.a.pvp.net",
 
 });
