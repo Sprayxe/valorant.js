@@ -3,5 +3,7 @@ module.exports = Object.freeze({
   ENTITLEMENTS: "https://entitlements.auth.riotgames.com",
   NABASE: "https://pd.na.a.pvp.net",
   EUBASE: "https://pd.eu.a.pvp.net",
+  NASHARED: "https://shared.na.a.pvp.net",
+  EUSHARED: "https://shared.eu.a.pvp.net",
   //more coming soon
 });
