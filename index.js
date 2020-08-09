@@ -1,2 +1,4 @@
-const ValorantClient = require("./src/Valorant");
-module.exports = ValorantClient;
+module.exports = {
+  ValorantClient: require("./src/Valorant"),
+  Region: require("./enums/regions"),
+};
