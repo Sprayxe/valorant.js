@@ -3,7 +3,7 @@ const { AUTH, ENTITLEMENTS } = require("../resources/Endpoints");
 
 class ValorantClient {
   constructor(config) {
-    this.region = config.region,
+    this.Endpoints = config.region,
     this.Authorization = null;
     this.killedToken = false;
     this.config = config;
