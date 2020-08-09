@@ -10,7 +10,7 @@ module.exports = Object.freeze({
     SHARED: Endpoints.NASHARED
   },
   ap: {
-    BASE: Endpoints.ASIABASE,
-    SHARED: Endpoints.ASIASHARED
+    BASE: Endpoints.APBASE,
+    SHARED: Endpoints.APSHARED
   }
 });
