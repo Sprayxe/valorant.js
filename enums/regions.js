@@ -1,6 +1,6 @@
 const Endpoints = require("../resources/Endpoints");
 
-module.exports = Object.freeze({
+module.exports = {
   eu: {
     BASE: Endpoints.EUBASE,
     SHARED: Endpoints.EUSHARED
@@ -13,4 +13,4 @@ module.exports = Object.freeze({
     BASE: Endpoints.APBASE,
     SHARED: Endpoints.APSHARED
   }
-});
+};

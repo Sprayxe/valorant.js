@@ -1,4 +1,4 @@
-module.exports = Object.freeze({
+module.exports = {
 
   AUTH: "https://auth.riotgames.com",
 
@@ -16,4 +16,4 @@ module.exports = Object.freeze({
 
   APSHARED: "https://shared.ap.a.pvp.net",
 
-});
+};
