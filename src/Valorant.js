@@ -3,8 +3,8 @@ const { AUTH, ENTITLEMENTS } = require("../resources/Endpoints");
 
 class ValorantClient {
   /**
-   * @property {String} password Password of your account
-   * @property {String} email Email of your account
+   * @property {string} password Password of your account
+   * @property {string} email Email of your account
    * @property {Object} region Region of your account. MUST BE AN OBJECT, therefore use the enums
    */
   constructor(config) {
