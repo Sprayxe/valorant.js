@@ -3,15 +3,16 @@ const { AUTH, ENTITLEMENTS } = require("../resources/Endpoints");
 
 class ValorantClient {
   /**
-   * @property {string} password Password of your account
-   * @property {string} email Email of your account
-   * @property {Object} region Region of your account. MUST BE AN OBJECT, therefore use the enums
+   * @param {*} config - Set up your account and region for the correct use
+   * @param {string} config.email - Email of your account
+   * @param {string} config.password - Password of your account
+   * @property {Object} config.region - Region of your account, use region enums!
    */
   constructor(config) {
+    this.config = config;
     this.Endpoints = config.region,
     this.Authorization = null;
-    this.killedToken = false;
-    this.config = config;
+    this.killedSession = false;
     this.account = null;
   }
   
