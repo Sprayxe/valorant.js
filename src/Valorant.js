@@ -6,7 +6,7 @@ class ValorantClient {
    * @param {*} config - Set up your account and region for the correct use
    * @param {string} config.email - Email of your account
    * @param {string} config.password - Password of your account
-   * @property {Object} config.region - Region of your account, use region enums!
+   * @param {Object} config.region - Region of your account, use region enums!
    */
   constructor(config) {
     this.config = config;
