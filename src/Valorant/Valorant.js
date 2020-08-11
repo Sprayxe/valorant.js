@@ -73,12 +73,10 @@ class ValorantClient {
             "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
           }
         })).data;
-        const vlpoints = DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"];
-        const rdpoints = DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"];
         
         this.account.balance = {
-           "Valorant Points":vlpoints,
-           "Radianite Points":rdpoints
+           "Valorant Points":DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"];,
+           "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"];
         };
         return this.account.balance;
       } catch(err) {
