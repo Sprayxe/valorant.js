@@ -1,7 +1,6 @@
-const ValorantClient = require("../Valorant/Valorant");
 require("colors");
 
-class ValorantError extends ValorantClient {
+class ValorantError {
     /**
      * @param {string} error - The message of the error
      * @param {string} type - The type of the error
