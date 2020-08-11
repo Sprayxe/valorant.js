@@ -1,7 +1,7 @@
 const region = require("../../enums/regions");
 const { AUTH, ENTITLEMENTS } = require("../../resources/Endpoints");
-const { checkParams } = require("../Functions/checkParams");
-const ValorantError = require("../Functions/Error");
+const { checkParams } = require("../Components/Parameters");
+const ValorantError = require("../Components/Error");
 const axios = require("axios").default;
 require("colors");
 
@@ -46,6 +46,7 @@ class ValorantClient {
      */
     async setAccount() {
       try {
+         checkParams(this, "request")
          return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
         new ValorantError(err);
