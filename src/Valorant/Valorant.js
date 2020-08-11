@@ -44,7 +44,7 @@ class ValorantClient {
      * - Sets account information into an object
      * @returns {object} Updated account information in JSON format 
      */
-    async setAccount() {
+    async refreshAccount() {
       try {
          checkParams(this, "request")
          return console.log("Oauth is being currently developed! Please be patient.".green)
