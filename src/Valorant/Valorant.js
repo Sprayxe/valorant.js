@@ -35,7 +35,7 @@ class ValorantClient {
       try {
         return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
-
+        new ValorantError(err);
       }
     }
 
@@ -46,9 +46,9 @@ class ValorantClient {
      */
     async setAccount() {
       try {
-
+         return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
-
+        new ValorantError(err);
       }
     }
 
