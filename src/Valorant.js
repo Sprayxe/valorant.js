@@ -15,8 +15,19 @@ class ValorantClient {
     this.killedSession = false;
     this.account = null;
   }
-  
+   
   // [COMING SOON]
+
+  // Oauth & Account 
+
+
+  // User API's
+
+
+  // Information API's
+
+
+  // Match Information API's
 }
 
 module.exports = ValorantClient;
