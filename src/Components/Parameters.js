@@ -5,6 +5,7 @@ module.exports = {
      */
     checkParams: function(data, type) {
         const ValorantError = require("./Error");
+        const Exception = require("../../resources/Exceptions");
 
         // Check for right Valorant Client config
         if(type === "client") {
@@ -16,7 +17,7 @@ module.exports = {
             // TypeErrors
             if(typeof data.password !== "string") new ValorantError("Account password is not a string!", "type");
             if(typeof data.email !== "string") new ValorantError("Account email is not a string!", "type");
-            if(typeof data.region !== "object") new ValorantError("Account region is not an object! Use the Region enums.", "type");
+            if(typeof data.region !== "object" || !data.region.BASE) new ValorantError("Account region is not an object! Use the Region enums.", "type");
         }
         
         // Check for auth & account before sending request
