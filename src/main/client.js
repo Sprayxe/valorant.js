@@ -40,7 +40,7 @@ class ValorantClient {
      */
     async refreshAccount() {
       try {
-         checkParams(this, "request")
+         //checkParams(this, "request")
          return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
         new ValorantError(err);
@@ -57,6 +57,7 @@ class ValorantClient {
      */
     async getWallet() {
       try { 
+        /*
         checkParams(this, "request")
 
         const DATA = (await axios({
@@ -73,7 +74,8 @@ class ValorantClient {
            "Valorant Points":DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
            "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
         };
-        return this.account.balance;
+        return this.account.balance;*/
+        return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
         new ValorantError(err);
       }
