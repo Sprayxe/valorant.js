@@ -190,4 +190,4 @@ class Client {
   // Match Information API's
 }
 
-module.exports = ValorantClient;
+module.exports = Client;
