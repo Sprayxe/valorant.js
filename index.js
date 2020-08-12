@@ -1,4 +1,4 @@
 module.exports = {
-  ValorantClient: require("./src/client/valorant"),
+  ValorantClient: require("./src/main/valorant/index"),
   Region: require("./enums/regions"),
 };
