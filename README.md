@@ -10,7 +10,14 @@ Don't worry, more is coming soon! Just come back here at a later date and check.
 ```npm install valorant.js --save```
 
 ## Example 
-<> = Replace with your value (remove <>)
+<> = Replace with your value (remove <>)\
+Regarding `region`: Choose between `eu` (europe), `na` (north america) and `ap` (asian pacific).\
+So:\
+europe would be: `Valorant.Region.eu`\
+north america would be: `Valorant.Region.na`\
+asia pacific would be: `Valorant.Region.ap`\
+</br>
+
 ```js
 (async () => {
   try {
@@ -20,7 +27,7 @@ Don't worry, more is coming soon! Just come back here at a later date and check.
     const valorant = new Valorant.ValorantClient({
       username: "<YOUR_USERNAME>",
       password: "<YOUR_PASSWORD>",
-      region: Valorant.Region.<YOUR_REGION(choose between: eu, na, ap)>
+      region: Valorant.Region.<YOUR_REGION>
     });
 
     await valorant.login();
