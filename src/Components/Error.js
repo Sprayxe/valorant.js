@@ -7,16 +7,16 @@ class ValorantError {
      */
     constructor(error, type) {
         // TypeError
-        if(type === "type") throw new TypeError(`VALORANT.JS: ${error}`.red);
+        if(type === "type") throw new TypeError(`[Valorant - Error] ${error.type}: { message: ${error.message}, code: ${error.code} }`.red);
 
         // ReferrenceError
-        else if(type === "reference") throw new ReferenceError(`VALORANT.JS: ${error}`.red);
+        else if(type === "reference") throw new ReferenceError(`[Valorant - Error] ${error.type}: { message: ${error.message}, code: ${error.code} }`.red);
 
         // SyntaxError
-        else if(type === "syntax") throw new SyntaxError(`VALORANT.JS: ${error}`.red);
+        else if(type === "syntax") throw new SyntaxError(`[Valorant - Error] ${error.type}: { message: ${error.message}, code: ${error.code} }`.red);
 
         // No ErrorType provided
-        else throw new Error(`VALORANT.JS: ${error}`.red);
+        else throw new Error(`[Valorant - Error] ${error.type}: { message: ${error.message}, code: ${error.code} }`.red);
     }
 }
 

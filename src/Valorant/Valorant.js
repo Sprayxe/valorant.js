@@ -4,13 +4,7 @@ const { checkParams } = require("../Components/Parameters");
 const ValorantError = require("../Components/Error");
 const axios = require("axios").default;
 require("colors");
-
-/**
- * @typedef {object} Config
- * @property {string} email - Email of your account
- * @property {string} password - Password of your account
- * @property {object} region - Region of your account, use region enums!
- */
+require("../../lib/type");
 
 class ValorantClient {
   /**
@@ -76,8 +70,8 @@ class ValorantClient {
         })).data;
         
         this.account.balance = {
-           "Valorant Points":DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"];,
-           "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"];
+           "Valorant Points":DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
+           "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
         };
         return this.account.balance;
       } catch(err) {
