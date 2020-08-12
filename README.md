@@ -9,6 +9,30 @@ Don't worry, more is coming soon! Just come back here at a later date and check.
 ## Installation
 ```npm install valorant.js --save```
 
+## Example 
+<> = Replace with your value (remove <>)
+```js
+(async () => {
+  try {
+
+    const Valorant = require("valorant.js");
+  
+    const valorant = new Valorant.ValorantClient({
+      username: "<YOUR_USERNAME>",
+      password: "<YOUR_PASSWORD>",
+      region: Valorant.Region.<YOUR_REGION(choose between: eu, na, ap)>
+    });
+
+    await valorant.login();
+    const balance = await valorant.getWallet();
+    console.log(balance);
+
+  } catch(err) {
+    console.error(err)
+  }
+})();
+```
+
 ### Support
 * [Discord](https://discord.gg/q37Dfyn)
 
