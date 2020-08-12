@@ -1,5 +1,5 @@
 const region = require("../../enums/regions");
-const { AUTH, ENTITLEMENTS } = require("../../resources/Endpoints");
+const { AUTH, ENTITLEMENTS } = require("../../resources/endpoints");
 const { checkParams } = require("../managers/parameters");
 const ValorantError = require("../errors/error");
 const axios = require("axios").default;
