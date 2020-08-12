@@ -13,6 +13,7 @@ class ValorantClient {
   constructor(config) {
     checkParams(config, "client");
     this.config = config;
+    this.debug = config.debug;
     this.Endpoints = config.region,
     this.Authorization = null;
     this.killedSession = false;
