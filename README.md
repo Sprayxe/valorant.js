@@ -13,9 +13,9 @@ Don't worry, more is coming soon! Just come back here at a later date and check.
 <> = Replace with your value (remove <>)\
 Regarding `region`: Choose between `eu` (europe), `na` (north america) and `ap` (asian pacific).\
 So:\
-europe would be: `Valorant.Region.eu`\
-north america would be: `Valorant.Region.na`\
-asia pacific would be: `Valorant.Region.ap`\
+europe would be: `Valorant.region.eu`\
+north america would be: `Valorant.region.na`\
+asia pacific would be: `Valorant.region.ap`\
 </br>
 
 ```js
@@ -24,10 +24,10 @@ asia pacific would be: `Valorant.Region.ap`\
 
     const Valorant = require("valorant.js");
   
-    const valorant = new Valorant.ValorantClient({
+    const valorant = new Valorant.Client({
       username: "<YOUR_USERNAME>",
       password: "<YOUR_PASSWORD>",
-      region: Valorant.Region.<YOUR_REGION>
+      region: Valorant.region.<YOUR_REGION>
     });
 
     await valorant.login();

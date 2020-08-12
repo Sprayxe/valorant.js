@@ -7,7 +7,7 @@ const e = require("../../errors/exceptions");
 require("colors");
 require("../../../typings/index");
 
-class ValorantClient {
+class Client {
   /**
    * @param config {Config}
   */ 
@@ -34,6 +34,7 @@ class ValorantClient {
      */
     async login() {
       try {
+        console.log("[Valorant] Signing into Riot Services...".magenta);
         const h = await axios({
           method: 'post',
           url: this.Endpoints.AUTH + '/api/v1/authorization',
@@ -96,6 +97,7 @@ class ValorantClient {
           access_token: accessToken,
           ...this.Authorization
         };
+        console.log("[Valorant] Signed in succesfully!".magenta);
         this.account = await this.refreshAccount();
         return this.account;
 
