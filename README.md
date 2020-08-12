@@ -6,6 +6,9 @@
 In v1.0.5 Oauth has been added and is now available! For now you can only get the user's wallet.\
 Don't worry, more is coming soon! Just come back here at a later date and check.
 
+## Installation
+```npm install valorant.js --save```
+
 ### Support
 * [Discord](https://discord.gg/q37Dfyn)
 
