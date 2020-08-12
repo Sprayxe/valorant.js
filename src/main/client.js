@@ -27,6 +27,12 @@ class ValorantClient {
      */
     async login() {
       try {
+        /* 
+        console.log("[Valorant] Signing into Riot Services...".magenta);
+        [send requests here]
+        console.log("[Valorant] Signing was successful!".magenta);
+        return true;
+        */
         return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
         new ValorantError(err);
@@ -40,7 +46,12 @@ class ValorantClient {
      */
     async refreshAccount() {
       try {
-         //checkParams(this, "request")
+         /* 
+         console.log("[Valorant] Refreshing account data...".magenta); 
+         checkParams(this, "request")
+         [code here]
+         console.log("[Valorant] Refreshed account data!".magenta);
+         */
          return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
         new ValorantError(err);
@@ -58,6 +69,7 @@ class ValorantClient {
     async getWallet() {
       try { 
         /*
+        console.log("[Valorant] Getting account wallet...".magenta);
         checkParams(this, "request")
 
         const DATA = (await axios({
@@ -74,6 +86,7 @@ class ValorantClient {
            "Valorant Points":DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
            "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
         };
+        console.log("[Valorant] Got account wallet!".magenta);
         return this.account.balance;*/
         return console.log("Oauth is being currently developed! Please be patient.".green)
       } catch(err) {
