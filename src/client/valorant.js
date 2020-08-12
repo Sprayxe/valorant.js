@@ -1,10 +1,10 @@
 const region = require("../../enums/regions");
 const { AUTH, ENTITLEMENTS } = require("../../resources/Endpoints");
-const { checkParams } = require("../Components/Parameters");
-const ValorantError = require("../Components/Error");
+const { checkParams } = require("../managers/parameters");
+const ValorantError = require("../errors/error");
 const axios = require("axios").default;
 require("colors");
-require("../../lib/type");
+require("../../typings/index");
 
 class ValorantClient {
   /**

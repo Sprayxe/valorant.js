@@ -4,8 +4,8 @@ module.exports = {
      * @param {string} type - Determines if its the Valorant Client constructor or a Request
      */
     checkParams: function(data, type) {
-        const ValorantError = require("./Error");
-        const e = require("../../resources/Exceptions");
+        const ValorantError = require("../errors/error");
+        const e = require("../errors/exceptions");
 
         // Check for right Valorant Client config
         if(type === "client") {

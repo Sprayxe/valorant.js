@@ -1,4 +1,4 @@
-const Endpoints = require("../resources/Endpoints");
+const Endpoints = require("../resources/endpoints");
 
 module.exports = {
   eu: {
