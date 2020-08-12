@@ -1,11 +1,11 @@
 module.exports = {
   
   // Client Constructor
-  ACCOUNT_EMAIL_MISSING : { message: "Account email has not been provided!", type: "ACCOUNT_EMAIL_MISSING", code: 10001 },
+  ACCOUNT_USERNAME_MISSING : { message: "Account username has not been provided!", type: "ACCOUNT_EMAIL_MISSING", code: 10001 },
   ACCOUNT_PASSWORD_MISSING : { message: "Account password has not been provided!", type: "ACCOUNT_PASSWORD_MISSING", code: 10002 },
   ACCOUNT_REGION_MISSING : { message: "Account region has not been provided!", type: "ACCOUNT_REGION_MISSING", code: 10003 },
   
-  ACCOUNT_EMAIL_TYPE : { message: "Account email is not a string!", type: "ACCOUNT_EMAIL_TYPE", code: 20001 },
+  ACCOUNT_USERNAME_TYPE : { message: "Account username is not a string!", type: "ACCOUNT_EMAIL_TYPE", code: 20001 },
   ACCOUNT_PASSWORD_TYPE : { message: "Account password is not a string!", type: "ACCOUNT_PASSWORD_TYPE", code: 20002 },
   ACCOUNT_REGION_TYPE : { message: "Account region is not a valid library enum!", type: "ACCOUNT_REGION_TYPE", code: 20003 },
   

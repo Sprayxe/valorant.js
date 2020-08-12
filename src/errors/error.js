@@ -16,7 +16,7 @@ class ValorantError {
         else if(type === "syntax") throw new SyntaxError(`[Valorant - Error] ${error.type}: { message: ${error.message}, code: ${error.code} }`.red);
 
         // No ErrorType provided
-        else throw new Error(`[Valorant - Error] ${error.type}: { message: ${error.message}, code: ${error.code} }`.red);
+        else throw new Error(`[Valorant - Error] : { message: ${error.message}, code: ${error.response.status} }`.red);
     }
 }
 

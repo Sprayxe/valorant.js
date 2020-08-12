@@ -1,10 +1,10 @@
-const region = require("../../enums/regions");
-const { AUTH, ENTITLEMENTS } = require("../../resources/endpoints");
-const { checkParams } = require("../managers/parameters");
-const ValorantError = require("../errors/error");
+const region = require("../../../enums/regions");
+const { AUTH, ENTITLEMENTS } = require("../../../resources/endpoints");
+const { checkParams } = require("../../managers/parameters");
+const ValorantError = require("../../errors/error");
 const axios = require("axios").default;
 require("colors");
-require("../../typings/index");
+require("../../../typings/index");
 
 class ValorantClient {
   /**
@@ -14,7 +14,12 @@ class ValorantClient {
     checkParams(config, "client");
     this.config = config;
     this.debug = config.debug;
-    this.Endpoints = config.region,
+    this.Endpoints = {
+      BASE: config.region.BASE,
+      SHARED: config.region.SHARED,
+      AUTH: AUTH,
+      ENTITLEMENTS: ENTITLEMENTS
+    };
     this.Authorization = null;
     this.killedSession = false;
     this.account = null;
@@ -28,15 +33,72 @@ class ValorantClient {
      */
     async login() {
       try {
-        /* 
-        console.log("[Valorant] Signing into Riot Services...".magenta);
-        [send requests here]
-        console.log("[Valorant] Signing was successful!".magenta);
-        return true;
-        */
-        return console.log("Oauth is being currently developed! Please be patient.".green)
+        const h = await axios({
+          method: 'post',
+          url: this.Endpoints.AUTH + '/api/v1/authorization',
+          headers: {
+            "content-type":"application/json",
+            "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+          },
+          data: {
+            "client_id":"play-valorant-web-prod",
+            "nonce":"1",
+            "redirect_uri":"https://beta.playvalorant.com/opt_in",
+            "response_type":"token id_token"
+          },
+          withCredentials: true,
+        });
+        const cookies = [];
+        const f = (JSON.stringify(h.headers["set-cookie"])).split("=");
+        f.forEach(a => {
+          const kek = a.replace("[", "").replace(";", "").replace("expires", "").replace("Max-Age", "").replace(",", "").replace("Path", "").replace("\"", "").replace("Lax\"", "").trim();
+          cookies.push(kek)
+        })
+        this.Authorization = { cookies: `__cfduid=${cookies[1]}; did=${cookies[6]}; asid=${cookies[10]}; clid=${cookies[12]}` }
+
+        const loginData = (await axios({
+          method: 'put',
+          url: this.Endpoints.AUTH + '/api/v1/authorization',
+          headers: {
+            "content-type":"application/json",
+            "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36",
+            "cookie":this.Authorization.cookies
+          },
+          data: {
+            "type":"auth",
+            "username":`${this.config.username}`,
+            "password":`${this.config.password}`
+          },
+          withCredentials: true,
+        })).data;
+
+
+        let beginning = (JSON.stringify(loginData.response.parameters.uri)).indexOf("access_token=") + 13;
+        let end = (JSON.stringify(loginData.response.parameters.uri)).indexOf("&");
+        const accessToken = (JSON.stringify(loginData.response.parameters.uri)).substring(beginning, end);
+
+        const entitlementsData = (await axios({
+          method: 'post',
+          url: this.Endpoints.ENTITLEMENTS + '/api/token/v1',
+          headers: {
+            "Authorization":`Bearer ${accessToken}`,
+            "content-type":"application/json",
+
+          },
+          data: {}
+        })).data;
+
+        const entitlementsToken = entitlementsData.entitlements_token
+
+        this.Authorization = {
+          fullToken:accessToken,
+          RSOToken:entitlementsToken
+        }
+
+        return this.Authorization;
+
       } catch(err) {
-        new ValorantError(err);
+        new ValorantError(err)
       }
     }
 

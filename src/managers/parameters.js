@@ -11,12 +11,12 @@ module.exports = {
         if(type === "client") {
             // ReferenceErrors
             if(!data.password) new ValorantError(e.ACCOUNT_PASSWORD_MISSING, "reference");
-            if(!data.email) new ValorantError(e.ACCOUNT_EMAIL_MISSING, "reference");
+            if(!data.username) new ValorantError(e.ACCOUNT_USERNAME_MISSING, "reference");
             if(!data.region) new ValorantError(e.ACCOUNT_REGION_MISSING, "reference");
 
             // TypeErrors
             if(typeof data.password !== "string") new ValorantError(e.ACCOUNT_PASSWORD_TYPE, "type");
-            if(typeof data.email !== "string") new ValorantError(e.ACCOUNT_EMAIL_TYPE, "type");
+            if(typeof data.username !== "string") new ValorantError(e.ACCOUNT_USERNAME_TYPE, "type");
             if(typeof data.region !== "object" || !data.region.BASE) new ValorantError(e.ACCOUNT_REGION_TYPE, "type");
         }
         
