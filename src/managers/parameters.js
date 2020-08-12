@@ -28,8 +28,8 @@ module.exports = {
           if(!data.Authorization.fullToken) new ValorantError(e.CLIENT_BEARER_MISSING, "syntax");
 
          // Account missing
-          if(data.account === null) new ValorantError(e.CLIENT_ACCOUNT_NULL, "syntax");
-          if(!data.account.id) new ValorantError(e.CLIENT_ACCOUNTID_MISSING, "syntax")
+         // if(data.account === null) new ValorantError(e.CLIENT_ACCOUNT_NULL, "syntax");
+          //if(!data.account.id) new ValorantError(e.CLIENT_ACCOUNTID_MISSING, "syntax")
         }
     }
 };

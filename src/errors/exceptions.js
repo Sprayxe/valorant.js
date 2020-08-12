@@ -18,6 +18,7 @@ module.exports = {
   
   // Client Account
   CLIENT_ACCOUNT_NULL : { message: "You are not properly logged in. Please login again.", type: "CLIENT_ACCOUNT_NULL", code: 40001 }, 
-  CLIENT_ACCOUNTID_MISSING : { message: "You are not properly loggrd in! Please login again.", type: "CLIENT_ACCOUNTID_MISSING", code: 40002 }
+  CLIENT_ACCOUNTID_MISSING : { message: "You are not properly loggrd in! Please login again.", type: "CLIENT_ACCOUNTID_MISSING", code: 40002 },
+  CLIENT_ACCOUNT_NEW : { message: "You have to start valorant atleast once before you can use this.", type: "CLIENT_ACCOUNT_NEW", code: 40003}
   
 };

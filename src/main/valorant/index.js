@@ -3,6 +3,7 @@ const { AUTH, ENTITLEMENTS } = require("../../../resources/endpoints");
 const { checkParams } = require("../../managers/parameters");
 const ValorantError = require("../../errors/error");
 const axios = require("axios").default;
+const e = require("../../errors/exceptions");
 require("colors");
 require("../../../typings/index");
 
@@ -29,7 +30,7 @@ class ValorantClient {
 
     /**
      * - Logs into your valorant account using provided config
-     * @returns {boolean} Return true if login was successful
+     * @returns {object} Returns account info if login was successful
      */
     async login() {
       try {
@@ -83,19 +84,20 @@ class ValorantClient {
           headers: {
             "Authorization":`Bearer ${accessToken}`,
             "content-type":"application/json",
-
           },
           data: {}
         })).data;
 
-        const entitlementsToken = entitlementsData.entitlements_token
+        const entitlementsToken = entitlementsData["entitlements_token"]
 
         this.Authorization = {
-          fullToken:accessToken,
-          RSOToken:entitlementsToken
-        }
-
-        return this.Authorization;
+          fullToken: `Bearer ${accessToken}`,
+          RSOToken: entitlementsToken,
+          access_token: accessToken,
+          ...this.Authorization
+        };
+        this.account = await this.refreshAccount();
+        return this.account;
 
       } catch(err) {
         new ValorantError(err)
@@ -109,15 +111,32 @@ class ValorantClient {
      */
     async refreshAccount() {
       try {
-         /* 
-         console.log("[Valorant] Refreshing account data...".magenta); 
-         checkParams(this, "request")
-         [code here]
-         console.log("[Valorant] Refreshed account data!".magenta);
-         */
-         return console.log("Oauth is being currently developed! Please be patient.".green)
+        checkParams(this, "request")
+        console.log("[Valorant] Refreshing account data...".magenta); 
+
+        const userid = (await axios({
+          method: "POST",
+          url: `${this.Endpoints.BASE}/name-service/v1/players`,
+          headers: {
+            "Authorization":this.Authorization.fullToken,
+            "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+          },
+          data: {}
+        })).data;
+
+        this.account = {
+          id: userid.Subject,
+          displayName: userid.DisplayName,
+          gameName: userid.GameName,
+          tagLine: userid.TagLine
+        }
+
+        console.log("[Valorant] Refreshed account data!".magenta);
+        return this.account;
+         
+        
       } catch(err) {
-        new ValorantError(err);
+        console.error(err)
       }
     }
 
@@ -131,13 +150,18 @@ class ValorantClient {
      */
     async getWallet() {
       try { 
-        /*
+        
         console.log("[Valorant] Getting account wallet...".magenta);
-        checkParams(this, "request")
+        checkParams(this, "request");
+        if(this.account.id === "") {
+          new ValorantError(e.CLIENT_ACCOUNT_NEW, "reference");
+          console.log("[Valorant] Could not get wallet!".magenta);
+          return
+        };
 
         const DATA = (await axios({
           method: "GET",
-          url: `${this.Endpoints.BASE}/store/v1/wallet/${this.account.id}`,
+          url: `${this.Endpoints.BASE}/store/v1/wallet/${this.account.id}/`,
           auth: this.Authorization.fullToken,
           headers: {
             "content-type":"application/json",
@@ -150,8 +174,7 @@ class ValorantClient {
            "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
         };
         console.log("[Valorant] Got account wallet!".magenta);
-        return this.account.balance;*/
-        return console.log("Oauth is being currently developed! Please be patient.".green)
+        return this.account.balance;
       } catch(err) {
         new ValorantError(err);
       }
