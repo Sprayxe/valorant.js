@@ -19,6 +19,11 @@ module.exports = {
   // Client Account
   CLIENT_ACCOUNT_NULL : { message: "You are not properly logged in. Please login again.", type: "CLIENT_ACCOUNT_NULL", code: 40001 }, 
   CLIENT_ACCOUNTID_MISSING : { message: "You are not properly loggrd in! Please login again.", type: "CLIENT_ACCOUNTID_MISSING", code: 40002 },
-  CLIENT_ACCOUNT_NEW : { message: "You have to start valorant atleast once before you can use this.", type: "CLIENT_ACCOUNT_NEW", code: 40003}
+  CLIENT_ACCOUNT_NEW : { message: "You have to start valorant atleast once before you can use this.", type: "CLIENT_ACCOUNT_NEW", code: 40003},
+
+
+  // Valorant Debugger
+  DEBUG_DATA_MISSING : { message: "You did not provide any data to log! Please provide some data.", type: "DEBUG_DATA_MISSING", code: 50001 },
+  DEBUG_TYPE_MISSING : { message: "You did not provide a type! Please provide a type.", type: "DEBUG_TYPE_MISSING", code: 50002 }
   
 };

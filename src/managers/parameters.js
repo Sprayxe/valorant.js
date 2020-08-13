@@ -31,5 +31,12 @@ module.exports = {
          // if(data.account === null) new ValorantError(e.CLIENT_ACCOUNT_NULL, "syntax");
           //if(!data.account.id) new ValorantError(e.CLIENT_ACCOUNTID_MISSING, "syntax")
         }
+
+        // Check if debugging is enabled or just forced
+        if(type === "debug") {
+            // ReferenceErrors
+            if(!data.data) new ValorantError()
+
+        }
     }
 };

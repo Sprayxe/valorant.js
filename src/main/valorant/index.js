@@ -10,7 +10,7 @@ const MMRParser = require("../../parsers/mmr");
 const MatchParser = require("../../parsers/match");
 const CompParser = require("../../parsers/match");
 require("colors");
-require("../../../typings/index");
+require("../../../typings/type");
 
 class Client {
   /**
@@ -27,7 +27,6 @@ class Client {
       ENTITLEMENTS: ENTITLEMENTS
     };
     this.Authorization = null;
-    this.killedSession = false;
     this.account = {
       id: "",
       displayName: "",
@@ -112,7 +111,7 @@ class Client {
         return hhh;
 
       } catch(err) {
-        new ValorantError(err)
+        new ValorantError(err, "request")
       }
     }
 
@@ -160,7 +159,7 @@ class Client {
           console.log("[Valorant] Refreshed account data successfully!".magenta);
           return this.account;
         }catch(err) {
-        console.error(err)
+          new ValorantError(err, "request")
       }
          
         
@@ -202,7 +201,7 @@ class Client {
         console.log("[Valorant] Got account wallet!".magenta);
         return this.account.balance;
       } catch(err) {
-        new ValorantError(err);
+        new ValorantError(err, "request")
       }
     }
 
@@ -246,7 +245,7 @@ class Client {
       const res = await parser.parse();
       return res;
     } catch(err) {
-      new ValorantError(err);
+      new ValorantError(err, "request")
     }
    };
 
@@ -283,7 +282,7 @@ class Client {
       return res;
 
      } catch(err) {
-       new ValorantError(err);
+      new ValorantError(err, "request")
      }
    }
   
