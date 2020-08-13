@@ -4,6 +4,11 @@ const { checkParams } = require("../../managers/parameters");
 const ValorantError = require("../../errors/error");
 const axios = require("axios").default;
 const e = require("../../errors/exceptions");
+const StoreParser = require("../../parsers/store");
+const ItemParser = require("../../parsers/item");
+const MMRParser = require("../../parsers/mmr");
+const MatchParser = require("../../parsers/match");
+const CompParser = require("../../parsers/match");
 require("colors");
 require("../../../typings/index");
 
@@ -124,14 +129,14 @@ class Client {
 
         const userid = (await axios({
           method: "POST",
-          url: `${this.Endpoints.BASE}/name-service/v1/players`,
+          url: `${this.Endpoints.AUTH}/userinfo`,
           headers: {
             "Authorization":this.Authorization.fullToken,
             "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
           },
           data: {}
         })).data;
-        if(userid.Subject === "") {
+        if(userid.sub === "") {
           console.log("[Valorant] Account data was empty. Please start valorant atleast once to use this library!".magenta);
           return null;
         }
@@ -144,15 +149,14 @@ class Client {
               "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
             },
             data: [
-              userid.Subject
+              userid.sub
             ]
           })).data;
 
           this.account = {
-            id: userdata.Subject,
-            displayName: userdata.DisplayName,
-            gameName: userdata.GameName,
-            tagLine: userdata.TagLine,
+            id: userdata[0].Subject,
+            displayName: userdata[0].GameName,
+            tagLine: userdata[0].TagLine,
             ...this.account
           };
           console.log("[Valorant] Refreshed account data successfully!".magenta);
@@ -187,10 +191,10 @@ class Client {
         const DATA = (await axios({
           method: "GET",
           url: `${this.Endpoints.BASE}/store/v1/wallet/${this.account.id}/`,
-          auth: this.Authorization.fullToken,
           headers: {
             "content-type":"application/json",
-            "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+            "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
+            "Authorization":this.Authorization.fullToken
           }
         })).data;
         
@@ -213,15 +217,22 @@ class Client {
   // Match Information API's
 
     /**
-    * Gets the users last 10 matches
-    * @param start {number} start of the entries
-    * @param end {number} end of the entries (max. 20)
+    * - Gets the users last matches
+    * @param start {number} start of the entries [optional]
+    * @param end {number} end of the entries (max. 20) [optional]
     * @returns {object} Parsed History
     */
     async getMatchHistory(start, end) {
     try {
       checkParams(this, "request");
+
       console.log("[Valorant] Getting match history...".magenta);
+
+      if(this.account.id === "") {
+        new ValorantError(e.CLIENT_ACCOUNT_NEW, "reference");
+        console.log("[Valorant] Could not get match history!".magenta);
+        return
+      };
 
       const history = (await axios({
         method: "GET",
@@ -234,36 +245,50 @@ class Client {
       })).data;
 
       console.log("[Valorant] Got match history! Beginning to parse...".magenta);
-      const parsed = [];
-      await new Promise((resolve) => {
-        let length = history.History.length;
-        for(let mStack in history.History) {
-         const m = history.History[mStack];
-         const date = new Date(parseInt(m.GameStartTime));
-         
-         if(m.MatchID) {
-           parsed.push({ "MatchID":m.MatchID, "GameStartTime":date, "TeamID":m.TeamID});
-           length--;
-         }
-     
-         if(length === 0) {
-           console.log("[Valorant] Parsed match history!");
-          resolve();
-         }
-        }
-      });
-      const newHistory = {
-       "Subject":history.Subject,
-       "BeginIndex": history.BeginIndex,
-       "EndIndex": history.EndIndex,
-       "Total": history.Total,
-       "History": parsed
-      };
-      return newHistory;
+      const parser = new MatchParser(history);
+      const res = await parser.parse();
+      return res;
     } catch(err) {
       new ValorantError(err);
     }
    };
+
+   /**
+    * - Gets the users competitive history
+    * @param start {number} start of the entries [optional]
+    * @param end {number} end of the entries (max. 10) [optional]
+    * @returns {object} Parsed History
+    */
+   async getCompetitiveHistory(start, end) {
+     try {
+      checkParams(this, "request");
+      console.log("[Valorant] Getting competitive history...".magenta);
+
+      if(this.account.id === "") {
+        new ValorantError(e.CLIENT_ACCOUNT_NEW, "reference");
+        console.log("[Valorant] Could not get competitive history!".magenta);
+        return
+      };
+
+      const history = (await axios({
+        method: "GET",
+        url: `${this.Endpoints.BASE}/mmr/v1/players/${this.account.id}/competitiveupdates?startIndex=${start || 0}&endIndex=${end || 10}`,
+        headers: {
+         "Authorization":this.Authorization.fullToken,
+         "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+        },
+        data: {},
+      })).data;
+
+      console.log("[Valorant] Got competitive history! Beginning to parse...".magenta);
+      const parser = new CompParser(history);
+      const res = await parser.parse();
+      return res;
+
+     } catch(err) {
+       new ValorantError(err);
+     }
+   }
   
 }
 
