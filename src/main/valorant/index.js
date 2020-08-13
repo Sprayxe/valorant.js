@@ -29,9 +29,8 @@ class Client {
     this.Authorization = null;
     this.killedSession = false;
     this.account = {
-      displayName: "",
       id: "",
-      gameName: "",
+      displayName: "",
       tagLine: "",
       balance: {}
     };
@@ -153,11 +152,10 @@ class Client {
             ]
           })).data;
 
-          this.account = {
-            id: userdata[0].Subject,
-            displayName: userdata[0].GameName,
-            tagLine: userdata[0].TagLine,
-            ...this.account
+          this.account.id = userdata[0].Subject;
+          this.account.displayName: userdata[0].GameName;
+          this.account.tagLine: userdata[0].TagLine;
+            
           };
           console.log("[Valorant] Refreshed account data successfully!".magenta);
           return this.account;
