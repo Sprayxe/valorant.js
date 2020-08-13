@@ -132,7 +132,7 @@ class Client {
         else {
           const userdata = (await axios({
             method: "PUT",
-            url: `${this.Endpoints.BASE/name-service/v2/players`,
+            url: `${this.Endpoints.BASE}/name-service/v2/players`,
             headers: {
               "Authorization":this.Authorization.fullToken,
               "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
