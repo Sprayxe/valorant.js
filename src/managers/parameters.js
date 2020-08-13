@@ -23,19 +23,24 @@ module.exports = {
         // Check for auth & account before sending request
         if(type === "request") {
          // Auth missing
-          if(data.Authorization === null) new ValorantError(e.CLIENT_AUTHORIZATION_MISSING, "syntax")
-          if(!data.Authorization.RSOToken) new ValorantError(e.CLIENT_RSOTOKEN_MISSING, "syntax")
-          if(!data.Authorization.fullToken) new ValorantError(e.CLIENT_BEARER_MISSING, "syntax");
+          if(data.Authorization === null) new ValorantError(e.CLIENT_AUTHORIZATION_MISSING, "reference")
+          if(!data.Authorization.RSOToken) new ValorantError(e.CLIENT_RSOTOKEN_MISSING, "reference")
+          if(!data.Authorization.fullToken) new ValorantError(e.CLIENT_BEARER_MISSING, "reference");
 
          // Account missing
-         // if(data.account === null) new ValorantError(e.CLIENT_ACCOUNT_NULL, "syntax");
-          //if(!data.account.id) new ValorantError(e.CLIENT_ACCOUNTID_MISSING, "syntax")
+         // if(data.account === null) new ValorantError(e.CLIENT_ACCOUNT_NULL, "reference");
+          //if(!data.account.id) new ValorantError(e.CLIENT_ACCOUNTID_MISSING, "reference")
         }
 
         // Check if debugging is enabled or just forced
         if(type === "debug") {
             // ReferenceErrors
-            if(!data.data) new ValorantError()
+            if(!data.data) new ValorantError(e.DEBUG_DATA_MISSING, "reference");
+            if(!data.type) new ValorantError(e.DEBUG_TYPE_MISSING", "reference");
+
+            // TypeErrors
+            if(typeof data.data !== "string") new ValorantError(e.DEBUG_DATA_TYPE, "type");
+            if(typeof data.type !== "string") new ValorantError(e.DEBUG_TYPE_TYPE, "type");
 
         }
     }
