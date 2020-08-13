@@ -211,6 +211,60 @@ class Client {
 
 
   // Match Information API's
+
+    /**
+    * Gets the users last 10 matches
+    * @param start {number} start of the entries
+    * @param end {number} end of the entries (max. 20)
+    * @returns {object} Parsed History
+    */
+    async getMatchHistory(start, end) {
+    try {
+      checkParams(this, "request");
+      console.log("[Valorant] Getting match history...".magenta);
+
+      const history = (await axios({
+        method: "GET",
+        url: `${this.Endpoints.BASE}/match-history/v1/history/${this.account.id}?startIndex=${start || 0}&endIndex=${end || 10}`,
+        headers: {
+         "Authorization":this.Authorization.fullToken,
+         "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+        },
+        data: {},
+      })).data;
+
+      console.log("[Valorant] Got match history! Beginning to parse...".magenta);
+      const parsed = [];
+      await new Promise((resolve) => {
+        let length = history.History.length;
+        for(let mStack in history.History) {
+         const m = history.History[mStack];
+         const date = new Date(parseInt(m.GameStartTime));
+         
+         if(m.MatchID) {
+           parsed.push({ "MatchID":m.MatchID, "GameStartTime":date, "TeamID":m.TeamID});
+           length--;
+         }
+     
+         if(length === 0) {
+           console.log("[Valorant] Parsed match history!");
+          resolve();
+         }
+        }
+      });
+      const newHistory = {
+       "Subject":history.Subject,
+       "BeginIndex": history.BeginIndex,
+       "EndIndex": history.EndIndex,
+       "Total": history.Total,
+       "History": parsed
+      };
+      return newHistory;
+    } catch(err) {
+      new ValorantError(err);
+    }
+   };
+  
 }
 
 module.exports = Client;
