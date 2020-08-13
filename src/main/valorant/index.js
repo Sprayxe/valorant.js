@@ -23,7 +23,13 @@ class Client {
     };
     this.Authorization = null;
     this.killedSession = false;
-    this.account = null;
+    this.account = {
+      displayName: "",
+      id: "",
+      gameName: "",
+      tagLine: "",
+      balance: {}
+    };
   }
 
   // Oauth & Account 
@@ -98,8 +104,8 @@ class Client {
           ...this.Authorization
         };
         console.log("[Valorant] Signed in succesfully!".magenta);
-        this.account = await this.refreshAccount();
-        return this.account;
+        const hhh = await this.refreshAccount();
+        return hhh;
 
       } catch(err) {
         new ValorantError(err)
@@ -146,7 +152,8 @@ class Client {
             id: userdata.Subject,
             displayName: userdata.DisplayName,
             gameName: userdata.GameName,
-            tagLine: userdata.TagLine
+            tagLine: userdata.TagLine,
+            ...this.account
           };
           console.log("[Valorant] Refreshed account data successfully!".magenta);
           return this.account;
