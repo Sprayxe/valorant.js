@@ -42,6 +42,9 @@ module.exports = {
             if(typeof data.data !== "string") new ValorantError(e.DEBUG_DATA_TYPE, "type");
             if(typeof data.type !== "string") new ValorantError(e.DEBUG_TYPE_TYPE, "type");
 
+            // SyntaxErrors
+            if(data.type.toLowerCase() !== "request" && data.type.toLowerCase() !== "client") new ValorantError(e.DEBUG_TYPE_INVALID, "syntax");
+
         }
     }
 };
