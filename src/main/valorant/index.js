@@ -128,7 +128,7 @@ class Client {
         if(userid.Subject === "") {
           console.log("[Valorant] Account data was empty. Please start valorant atleast once to use this library!".magenta);
           return null;
-        };
+        }
         else {
           const userdata = (await axios({
             method: "PUT",
