@@ -7,10 +7,20 @@ class MatchParser {
   constructor(data) {
     this.data = data;
   };
+  
+  let newHistory = {
+    Subject:this.data.Subject,
+    BeginIndex: this.data.BeginIndex,
+    EndIndex: this.data.EndIndex,
+    Total: this.data.Total,
+    History: null
+  };
 
   async parse() {
     const parsed = [];
     await new Promise((resolve) => {
+      if(!this.data.History) return resolve();
+
       let length = this.data.History.length;
       for(let mStack in this.data.History) {
        const m = this.data.History[mStack];
@@ -22,18 +32,12 @@ class MatchParser {
        }
    
        if(length === 0) {
+        newHistory.History = parsed;
         resolve();
        }
       }
     });
       
-    const newHistory = {
-     "Subject":this.data.Subject,
-     "BeginIndex": this.data.BeginIndex,
-     "EndIndex": this.data.EndIndex,
-     "Total": this.data.Total,
-     "History": parsed
-    };
     return newHistory;
   }
 
