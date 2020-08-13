@@ -7,10 +7,19 @@ class CompParser {
     constructor(data) {
       this.data = data;
     };
-  
+
+   
+    let newHistory = {
+     Version: this.data.Version,
+     Subject:this.data.Subject,
+     Matches: null
+    };
+
     async parse() {
       const parsed = [];
       await new Promise((resolve) => {
+        if(!this.data.Matches) return resolve();
+
         let length = this.data.Matches.length;
         for(let mStack in this.data.Matches) {
          const m = this.data.Matches[mStack];
@@ -22,16 +31,12 @@ class CompParser {
          }
      
          if(length === 0) {
+          newHistory.Matches = parsed;
           resolve();
          }
         }
       });
         
-      const newHistory = {
-       "Version": this.data.Version,
-       "Subject":this.data.Subject,
-       "Matches": parsed
-      };
       return newHistory;
     }
   
