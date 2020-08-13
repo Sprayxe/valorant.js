@@ -125,16 +125,32 @@ class Client {
           },
           data: {}
         })).data;
+        if(userid.Subject === "") {
+          console.log("[Valorant] Account data was empty. Please start valorant atleast once to use this library!".magenta);
+          return null;
+        };
+        else {
+          const userdata = (await axios({
+            method: "PUT",
+            url: `${this.Endpoints.BASE/name-service/v2/players`,
+            headers: {
+              "Authorization":this.Authorization.fullToken,
+              "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+            },
+            data: [
+              userid.Subject
+            ]
+          })).data;
 
-        this.account = {
-          id: userid.Subject,
-          displayName: userid.DisplayName,
-          gameName: userid.GameName,
-          tagLine: userid.TagLine
+          this.account = {
+            id: userdata.Subject,
+            displayName: userdata.DisplayName,
+            gameName: userdata.GameName,
+            tagLine: userdata.TagLine
+          };
+          console.log("[Valorant] Refreshed account data successfully!".magenta);
+          return this.account;
         }
-
-        console.log("[Valorant] Refreshed account data!".magenta);
-        return this.account;
          
         
       } catch(err) {
