@@ -153,18 +153,17 @@ class Client {
           })).data;
 
           this.account.id = userdata[0].Subject;
-          this.account.displayName: userdata[0].GameName;
-          this.account.tagLine: userdata[0].TagLine;
+          this.account.displayName =  userdata[0].GameName;
+          this.account.tagLine = userdata[0].TagLine;
             
           };
           console.log("[Valorant] Refreshed account data successfully!".magenta);
           return this.account;
-        }
-         
-        
-      } catch(err) {
+        }catch(err) {
         console.error(err)
       }
+         
+        
     }
 
 
