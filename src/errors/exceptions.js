@@ -24,6 +24,11 @@ module.exports = {
 
   // Valorant Debugger
   DEBUG_DATA_MISSING : { message: "You did not provide any data to log! Please provide some data.", type: "DEBUG_DATA_MISSING", code: 50001 },
-  DEBUG_TYPE_MISSING : { message: "You did not provide a type! Please provide a type.", type: "DEBUG_TYPE_MISSING", code: 50002 }
+  DEBUG_TYPE_MISSING : { message: "You did not provide a type! Please provide a type.", type: "DEBUG_TYPE_MISSING", code: 50002 },
+
+  DEBUG_DATA_TYPE : { message: "Debug data to log is not a string!", type: "DEBUG_DATA_TYPE", code: 50003 },
+  DEBUG_TYPE_TYPE : { message: "Debug type is not a string!", type: "DEBUG_TYPE_TYPE", code: 50004 }
+
+  DEBUG_TYPE_INVALID : { message: "Provided debug type is invalid! Choose between: \"client\" or \"request\" .", type: "DEBUG_TYPE_INVALID", code: 50005 }
   
 };
