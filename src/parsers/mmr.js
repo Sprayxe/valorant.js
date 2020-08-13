@@ -1,4 +1,3 @@
-
 class MMRParser {
   /**
   * Parses the valorant player mmr
