@@ -41,7 +41,7 @@ asia pacific would be: `Valorant.region.ap`\
 ```
 
 ### Support
-* [Discord](https://discord.gg/q37Dfyn)
+* [Discord](https://discord.gg/q37Dfyn) - Just ask in #general
 
 ### Credit
 * [Sprayxe](https://twitter.com/Sprayxe_) `@Sprayxe#0742`
