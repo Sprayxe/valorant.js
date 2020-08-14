@@ -1,6 +1,5 @@
 const { checkParams } = require("../../managers/parameters");
-const e = require("../../errors/exceptions");
-const ValorantError("../../errors/index");
+const ValorantError("../../errors/error");
 require("colors");
 require("../../../typings/index.js");
 
