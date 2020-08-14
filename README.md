@@ -6,6 +6,10 @@
 In v1.0.5 Oauth has been added and is now available! For now you can only get the user's wallet.\
 Don't worry, more is coming soon! Just come back here at a later date and check.
 
+## Support
+* Report Issues/Bugs [here](https://github.com/Sprayxe/valorant.js/issues)
+* Join [Discord](https://discord.gg/q37Dfyn) - Ask in #general
+
 ## Installation
 ```npm install valorant.js --save```
 
@@ -39,9 +43,6 @@ asia pacific would be: `Valorant.region.ap`\
   }
 })();
 ```
-
-### Support
-* [Discord](https://discord.gg/q37Dfyn) - Just ask in #general
 
 ### Credit
 * [Sprayxe](https://twitter.com/Sprayxe_) `@Sprayxe#0742`
