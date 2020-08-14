@@ -253,8 +253,7 @@ class Client {
         headers: {
          "Authorization":this.Authorization.fullToken,
          "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
-        },
-        data: {},
+        }
       })).data;
 
       console.log("[Valorant] Got match history! Beginning to parse...".magenta);
@@ -289,8 +288,7 @@ class Client {
         headers: {
          "Authorization":this.Authorization.fullToken,
          "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
-        },
-        data: {},
+        }
       })).data;
 
       console.log("[Valorant] Got competitive history! Beginning to parse...".magenta);
