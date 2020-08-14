@@ -12,7 +12,7 @@ class MatchParser {
     this.isEnabled = isEnabled;
   };
 
-  async parse() {
+  async parse(data) {
     if(!data) this.debugger.error(e.MATCH_PARSER_NODATA.message, e.MATCH_PARSER_NODATA);
     try {
       let newHistory = {
