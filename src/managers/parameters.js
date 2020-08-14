@@ -36,7 +36,7 @@ module.exports = {
         if(type === "debug") {
             // ReferenceErrors
             if(!data.data) new ValorantError(e.DEBUG_DATA_MISSING, "reference");
-            if(!data.type) new ValorantError(e.DEBUG_TYPE_MISSING", "reference");
+            if(!data.type) new ValorantError(e.DEBUG_TYPE_MISSING, "reference");
 
             // TypeErrors
             if(typeof data.data !== "string") new ValorantError(e.DEBUG_DATA_TYPE, "type");
@@ -45,6 +45,7 @@ module.exports = {
             // SyntaxErrors
             if(data.type.toLowerCase() !== "request" && data.type.toLowerCase() !== "client") new ValorantError(e.DEBUG_TYPE_INVALID, "syntax");
 
+            
         }
     }
 };

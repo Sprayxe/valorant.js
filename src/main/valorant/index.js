@@ -1,16 +1,33 @@
-const region = require("../../../enums/regions");
-const { AUTH, ENTITLEMENTS } = require("../../../resources/endpoints");
-const { checkParams } = require("../../managers/parameters");
-const ValorantError = require("../../errors/error");
-const axios = require("axios").default;
-const e = require("../../errors/exceptions");
+// Parsers
 const StoreParser = require("../../parsers/store");
 const ItemParser = require("../../parsers/item");
 const MMRParser = require("../../parsers/mmr");
 const MatchParser = require("../../parsers/match");
 const CompParser = require("../../parsers/match");
+
+// Valorant Contructors
+const ValorantError = require("../../errors/error");
+const ValorantDebugger = require("../debug/index");
+
+// Enums
+const region = require("../../../enums/regions");
+
+// Resources
+const { AUTH, ENTITLEMENTS } = require("../../../resources/endpoints");
+
+// Messages
+const e = require("../../errors/exceptions");
+const m = require("../debug/messages");
+
+// Modules
 require("colors");
-require("../../../typings/type");
+const axios = require("axios").default;
+
+// Functions
+const { checkParams } = require("../../managers/parameters");
+
+// Typings
+require("../../../typings/index.js");
 
 class Client {
   /**
@@ -20,6 +37,7 @@ class Client {
     checkParams(config, "client");
     this.config = config;
     this.debug = config.debug;
+    this.debugger = new ValorantDebugger().debug()
     this.Endpoints = {
       BASE: config.region.BASE,
       SHARED: config.region.SHARED,
