@@ -40,4 +40,13 @@ module.exports = {
 
   MATCH_COMPHISTORY_FAIL: { message: "Failed to get competitive history.", type: "MATCH_COMPHISTORY_FAIL", code: 60002 },
   
+  // Information API
+  INFO_GETCONTRACT_FAIL: { message: "Failed to get stoey contract.", type:"INFO_GETCONTRACT_FAIL", code: 70001 },
+  
+  //Parsers
+  MATCH_PARSER_NODATA: { message: "No data to parse has been provided.", type: "MATCH_PARSER_NODATA", code: 80001 },
+  
+  COMP_PARSER_NODATA: { message: "No data to parse has been provided.", type: "COMP_PARSER_NODATA", code: 80002 },
+  
+  
 };

@@ -3,32 +3,32 @@ const e = require("../errors/exceptions");
 class MatchParser {
   /**
   * Parses the valorant match history
-  * @param data {object} Data to parse
+  * @param debug {object} Client's debugger
+  * @param isEnabled {boolean} Determines if debugging is enabled
   * @returns {object} parsed data
   */
-  constructor(data, debug, isEnabled) {
-    this.data = data;
+  constructor(debug, isEnabled) {
     this.debugger = debug;
     this.isEnabled = isEnabled;
   };
 
   async parse() {
-
+    if(!data) this.debugger.error(e.MATCH_PARSER_NODATA.message, e.MATCH_PARSER_NODATA);
     try {
       let newHistory = {
-        Subject:this.data.Subject,
-        BeginIndex: this.data.BeginIndex,
-        EndIndex: this.data.EndIndex,
-        Total: this.data.Total,
-        History: !this.data.History ? null : this.data.History
+        Subject:data.Subject,
+        BeginIndex: data.BeginIndex,
+        EndIndex: data.EndIndex,
+        Total: tdata.Total,
+        History: !data.History ? null : data.History
       };
       
       const parsed = [];
       await new Promise((resolve) => {
-  
-        let length = this.data.History.length;
-        for(let mStack in this.data.History) {
-         const m = this.data.History[mStack];
+        if(!data.History) resolve(false);
+        let length = data.History.length;
+        for(let mStack in data.History) {
+         const m = data.History[mStack];
          const date = new Date(parseInt(m.GameStartTime));
          
          if(m.MatchID) {
@@ -38,7 +38,7 @@ class MatchParser {
      
          if(length === 0) {
           newHistory.History = parsed;
-          resolve();
+          resolve(true);
          }
         }
       });

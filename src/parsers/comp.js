@@ -3,31 +3,32 @@ const e = require("../errors/exceptions");
 class CompParser {
     /**
     * Parses the valorant competitive history
-    * @param data {object} Data to parse
+    * @param debugger {object} Client's debugger
+    * @param isEnabled {boolean} determines if debuggins is enabled
     * @returns {object} parsed data
     */
-   constructor(data, debug, isEnabled) {
-    this.data = data;
+   constructor(debug, isEnabled) {
     this.debugger = debug;
     this.isEnabled = isEnabled;
   };
 
-    async parse() {
+    async parse(data) {
+     if(!data) return this.debugger.error(e.COMP_PARSER_NODATA.message, e.COMP_PARSER_NODATA);
       try {
         const parsed = [];
       
         let newHistory = {
-          Version: this.data.Version,
-          Subject:this.data.Subject,
-          Matches: !this.data.Matches ? null : this.data.Matches
+          Version: data.Version,
+          Subject: data.Subject,
+          Matches: !data.Matches ? null : data.Matches
         };
   
         await new Promise((resolve) => {
-          if(!this.data.Matches) return resolve();
+          if(!data.Matches) resolve(false);
   
-          let length = this.data.Matches.length;
-          for(let mStack in this.data.Matches) {
-           const m = this.data.Matches[mStack];
+          let length = data.Matches.length;
+          for(let mStack in data.Matches) {
+           const m = data.Matches[mStack];
            const date = new Date(parseInt(m.MatchStartTime));
            
            if(m.MatchID) {
@@ -37,7 +38,7 @@ class CompParser {
        
            if(length === 0) {
             newHistory.Matches = parsed;
-            resolve();
+            resolve(true);
            }
           }
         });

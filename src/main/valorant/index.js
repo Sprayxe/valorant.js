@@ -225,6 +225,32 @@ class Client {
     
 
   // Information API's
+  
+  /**
+   * - Gets the current story contract
+   * @returns {object} - contract data
+  */
+  async getStoryContract() {
+    try {
+      checkParams(this, "request");
+      this.debugger.debug(m.INFO_GETCONTRACT_START, "request", this.debug);
+    
+      const res = (await axios({
+        method: "GET",
+        url: `${this.Endpoints.BASE}/contract-definitions/v2/definitions/story`,
+        headers: {
+        "Authorization":this.Authorization.fullToken,
+        "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+        }
+      })).data;
+    
+       this.debugger.debug(m.INFO_GETCONTRACT_SUCCESS, "request", this.debug);
+       return res;
+      
+    } catch(err) {
+      this.debugger.error(e.INFO_GETCONTACT_FAIL, err)
+    }
+  }
 
 
   // Match Information API's
@@ -256,11 +282,11 @@ class Client {
       })).data;
 
       this.debugger.debug(`${m.MATCH_MATCHHISTORY_SUCCESS} ${m.MATCH_MATCHHISTORY_PARSE}`, "request", this.debug);
-      const res = await new MatchParser(history, this.debugger, this.debug).parse();
+      const res = await new MatchParser(this.debugger, this.debug).parse(history);
       this.debugger.debug(m.MATCH_MATCHHISTORY_PARSESUCCESS, "request", this.debug);
       return res;
     } catch(err) {
-      this.debugger.error(e.MATCH_COMPHISTORY_FAIL, err);
+      this.debugger.error(e.MATCH_MATCHHISTORY_FAIL, err);
     }
    };
 
@@ -290,7 +316,7 @@ class Client {
       })).data;
 
       this.debugger.debug(`${m.MATCH_COMPHISTORY_SUCCESS} ${m.MATCH_COMPHISTORY_PARSE}`, "request", this.debug);
-      const res = await new MatchParser(history, this.debugger, this.debug).parse();
+      const res = await new MatchParser(this.debugger, this.debug).parse(history);
       this.debugger.debug(m.MATCH_COMPHISTORY_PARSESUCCESS, "request", this.debug);
       return res;
 

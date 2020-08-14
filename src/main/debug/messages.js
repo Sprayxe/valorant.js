@@ -10,7 +10,11 @@ module.exports = {
     // Account API: Wallet
     ACCOUNT_GETWALLET_START:"Getting account wallet...",
     ACCOUNT_GETWALLET_SUCCESS:"Got account wallet!",
-   
+    
+    // Information API: Story Contract
+    INFO_GETCONTRACT_START:"Getting story contract...",
+    INFO_GETCONTRACT_SUCCESS:"Got story contract!",
+    
     // Match API: Match History
     MATCH_MATCHHISTORY_START:"Getting match history...",
     MATCH_MATCHHISTORY_SUCCESS:"Got match history!",
