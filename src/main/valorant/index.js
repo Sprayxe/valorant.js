@@ -283,7 +283,6 @@ class Client {
 
       this.debugger.debug(`${m.MATCH_MATCHHISTORY_SUCCESS} ${m.MATCH_MATCHHISTORY_PARSE}`, "request", this.debug);
       const res = await new MatchParser(this.debugger, this.debug).parse(history);
-      this.debugger.debug(m.MATCH_MATCHHISTORY_PARSESUCCESS, "request", this.debug);
       return res;
     } catch(err) {
       this.debugger.error(e.MATCH_MATCHHISTORY_FAIL, err);

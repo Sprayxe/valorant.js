@@ -31,7 +31,7 @@ class ValorantDebugger {
     const h = { data: data, error: error };
     checkParams(h, "error");
    
-    throw new Error(`{ data: ${data}, error: ${error} }`.red);
+    throw new Error(`{ data: ${JSON.stringify(data)}, error: ${error} }`.red);
   }
 }
 module.exports = ValorantDebugger;

@@ -19,7 +19,7 @@ class MatchParser {
         Subject:data.Subject,
         BeginIndex: data.BeginIndex,
         EndIndex: data.EndIndex,
-        Total: tdata.Total,
+        Total: data.Total,
         History: !data.History ? null : data.History
       };
       

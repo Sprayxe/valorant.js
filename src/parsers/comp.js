@@ -13,7 +13,7 @@ class CompParser {
   };
 
     async parse(data) {
-     if(!data) return this.debugger.error(e.COMP_PARSER_NODATA.message, e.COMP_PARSER_NODATA);
+     if(!data) this.debugger.error(e.COMP_PARSER_NODATA.message, e.COMP_PARSER_NODATA);
       try {
         const parsed = [];
       
