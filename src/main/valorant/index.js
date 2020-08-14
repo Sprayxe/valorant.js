@@ -256,8 +256,7 @@ class Client {
       })).data;
 
       this.debugger.debug(`${m.MATCH_MATCHHISTORY_SUCCESS} ${m.MATCH_MATCHHISTORY_PARSE}`, "request", this.debug);
-      const parser = new MatchParser(history);
-      const res = await parser.parse();
+      const res = await new MatchParser(history, this.debugger, this.debug).parse();
       this.debugger.debug(m.MATCH_MATCHHISTORY_PARSESUCCESS, "request", this.debug);
       return res;
     } catch(err) {
@@ -290,9 +289,8 @@ class Client {
         }
       })).data;
 
-      this.debugger.debug(`${m.MATCH_COMPHISTORY_SUCCESS} ${m.MATCH_MATCHHISTORY_PARSE}`, "reuqest", this.debug);
-      const parser = new CompParser(history);
-      const res = await parser.parse();
+      this.debugger.debug(`${m.MATCH_COMPHISTORY_SUCCESS} ${m.MATCH_COMPHISTORY_PARSE}`, "request", this.debug);
+      const res = await new MatchParser(history, this.debugger, this.debug).parse();
       this.debugger.debug(m.MATCH_COMPHISTORY_PARSESUCCESS, "request", this.debug);
       return res;
 

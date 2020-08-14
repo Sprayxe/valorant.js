@@ -3,7 +3,9 @@ require("colors");
 require("../../../typings/index");
 
 class ValorantDebugger {
-  constructor();
+  constructor(){
+
+  };
 
   /**
    * @param data {Debugger}
