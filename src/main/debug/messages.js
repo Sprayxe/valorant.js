@@ -2,25 +2,26 @@ module.exports = {
     // Signin
     CLIENT_SIGNIN_START:"Signing into Riot Services...",
     CLIENT_SIGNIN_SUCCESS:"Signed in successfully!",
-    CLIENT_SIGNIN_FAIL:"Failed to signin to Riot Services!",
 
     // Account API: Data
     ACCOUNT_REFRESH_START:"Refreshing account data...",
     ACCOUNT_REFRESH_SUCCESS:"Refreshed account data successfully!",
-    ACCOUNT_REFRESH_FAIL:"Failed to refresh account data!",
 
     // Account API: Wallet
     ACCOUNT_GETWALLET_START:"Getting account wallet...",
     ACCOUNT_GETWALLET_SUCCESS:"Got account wallet!",
-    ACCOUNT_GETWALLET_FAIL:"Failed to get account wallet!",
-
    
-    // Match API: History
-    MATCH_GETHISTORY_START:"Getting match history...",
-    MATCH_GETHISTORY_SUCCESS:"Got match history!",
-    MATCH_GETHISTORY_FAIL:"Failed to get match history",
+    // Match API: Match History
+    MATCH_MATCHHISTORY_START:"Getting match history...",
+    MATCH_MATCHHISTORY_SUCCESS:"Got match history!",
 
-    MATCH_GETHISTORY_PARSE:"Parsing match history...",
-    MATCH_GETHISTORY_PARSESUCCESS:"Parsed match history!",
-    MATCH_GEHISTORY_PARSEFAIL:"Failed to parse match history!",
+    MATCH_MATCHHISTORY_PARSE:"Parsing match history...",
+    MATCH_MATCHHISTORY_PARSESUCCESS:"Parsed match history!",
+
+    // Match API: Competitive History
+    MATCH_COMPHISTORY_START:"Getting competitive history...",
+    MATCH_COMPHISTORY_SUCCESS:"Got competitive history!",
+
+    MATCH_COMPHISTORY_PARSE:"Parsing competitive history...",
+    MATCH_COMPHISTORY_PARSESUCCESS:"Parsed competitive history!",
 }

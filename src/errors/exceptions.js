@@ -20,7 +20,11 @@ module.exports = {
   CLIENT_ACCOUNT_NULL : { message: "You are not properly logged in. Please login again.", type: "CLIENT_ACCOUNT_NULL", code: 40001 }, 
   CLIENT_ACCOUNTID_MISSING : { message: "You are not properly loggrd in! Please login again.", type: "CLIENT_ACCOUNTID_MISSING", code: 40002 },
   CLIENT_ACCOUNT_NEW : { message: "You have to start valorant atleast once before you can use this.", type: "CLIENT_ACCOUNT_NEW", code: 40003},
+  CLIENT_SIGNIN_FAIL: { message: "Failed to signin to Riot Services.", type: "CLIENT_SIGNIN_FAIL", code: 40004 },
 
+  // User Account
+  ACCOUNT_REFRESH_FAIL: { message: "Failed to refresh account data.", type: "ACCOUNT_REFRESH_FAIL", code: 40005 },
+  ACCOUNT_GETWALLET_FAIL: { message: "Failed to get account wallet.", type: "ACCOUNT_GETWALLET_FAIL", code: 40006 },
 
   // Valorant Debugger
   DEBUG_DATA_MISSING : { message: "You did not provide any data to log! Please provide some data.", type: "DEBUG_DATA_MISSING", code: 50001 },
@@ -29,6 +33,11 @@ module.exports = {
   DEBUG_DATA_TYPE : { message: "Debug data to log is not a string!", type: "DEBUG_DATA_TYPE", code: 50003 },
   DEBUG_TYPE_TYPE : { message: "Debug type is not a string!", type: "DEBUG_TYPE_TYPE", code: 50004 },
 
-  DEBUG_TYPE_INVALID : { message: "Provided debug type is invalid! Choose between: \"client\" or \"request\" .", type: "DEBUG_TYPE_INVALID", code: 50005 }
+  DEBUG_TYPE_INVALID : { message: "Provided debug type is invalid! Choose between: \"client\" or \"request\" .", type: "DEBUG_TYPE_INVALID", code: 50005 },
+
+  // Match API
+  MATCH_MATCHHISTORY_FAIL: { message: "Failed to get match history.", type: "MATCH_MATCHHISTORY_FAIL", code: 60001 },
+
+  MATCH_COMPHISTORY_FAIL: { message: "Failed to get competitive history.", type: "MATCH_COMPHISTORY_FAIL", code: 60002 },
   
 };

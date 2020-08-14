@@ -23,7 +23,7 @@ require("colors");
 const axios = require("axios").default;
 
 // Functions
-const { checkParams } = require("../../managers/parameters");
+const { checkParams } = require("../../helpers/parameters");
 
 // Typings
 require("../../../typings/index.js");
@@ -35,8 +35,8 @@ class Client {
   constructor(config) {
     checkParams(config, "client");
     this.config = config;
-    this.debug = config.debug;
-    this.debugger = new ValorantDebugger().debug()
+    this.debug = config.debug || false;
+    this.debugger = new ValorantDebugger();
     this.Endpoints = {
       BASE: config.region.BASE,
       SHARED: config.region.SHARED,
@@ -60,7 +60,7 @@ class Client {
      */
     async login() {
       try {
-        console.log("[Valorant] Signing into Riot Services...".magenta);
+        this.debugger.debug(m.CLIENT_SIGNIN_START, "client", this.debug);
         const h = await axios({
           method: 'post',
           url: this.Endpoints.AUTH + '/api/v1/authorization',
@@ -123,12 +123,12 @@ class Client {
           access_token: accessToken,
           ...this.Authorization
         };
-        console.log("[Valorant] Signed in succesfully!".magenta);
+        this.debugger.debug(m.CLIENT_SIGNIN_SUCCESS, "client", this.debug);
         const hhh = await this.refreshAccount();
         return hhh;
 
       } catch(err) {
-        new ValorantError(err, "request")
+        this.debugger.error(e.CLIENT_SIGNIN_FAIL, err);
       }
     }
 
@@ -140,7 +140,7 @@ class Client {
     async refreshAccount() {
       try {
         checkParams(this, "request")
-        console.log("[Valorant] Refreshing account data...".magenta); 
+        this.debugger.debug(m.ACCOUNT_REFRESH_START, "client", this.debug);
 
         const userid = (await axios({
           method: "POST",
@@ -173,10 +173,10 @@ class Client {
           this.account.tagLine = userdata[0].TagLine;
             
           };
-          console.log("[Valorant] Refreshed account data successfully!".magenta);
+          this.debugger.debug(m.ACCOUNT_REFRESH_SUCCESS, "client", this.debug);
           return this.account;
         }catch(err) {
-          new ValorantError(err, "request")
+          this.debugger.error(e.ACCOUNT_REFRESH_FAIL, err);
       }
          
         
@@ -193,7 +193,7 @@ class Client {
     async getWallet() {
       try { 
         
-        console.log("[Valorant] Getting account wallet...".magenta);
+        this.debugger.debug(m.ACCOUNT_GETWALLET_START, "request", this.debug);
         checkParams(this, "request");
         if(this.account.id === "") {
           new ValorantError(e.CLIENT_ACCOUNT_NEW, "reference");
@@ -215,10 +215,10 @@ class Client {
            "Valorant Points":DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
            "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
         };
-        console.log("[Valorant] Got account wallet!".magenta);
+        this.debugger.debug(m.ACCOUNT_GETWALLET_SUCCESS, "request", this.debug);
         return this.account.balance;
       } catch(err) {
-        new ValorantError(err, "request")
+        this.debugger.error(e.ACCOUNT_GETWALLET_FAIL, err);
       }
     }
 
@@ -239,11 +239,10 @@ class Client {
     try {
       checkParams(this, "request");
 
-      console.log("[Valorant] Getting match history...".magenta);
+      this.debugger.debug(m.MATCH_MATCHHISTORY_START, "request", this.debug);
 
       if(this.account.id === "") {
-        new ValorantError(e.CLIENT_ACCOUNT_NEW, "reference");
-        console.log("[Valorant] Could not get match history!".magenta);
+        this.debugger.debug(e.CLIENT_ACCOUNT_NEW, "client", this.debug);
         return
       };
 
@@ -256,12 +255,13 @@ class Client {
         }
       })).data;
 
-      console.log("[Valorant] Got match history! Beginning to parse...".magenta);
+      this.debugger.debug(`${m.MATCH_MATCHHISTORY_SUCCESS} ${m.MATCH_MATCHHISTORY_PARSE}`, "request", this.debug);
       const parser = new MatchParser(history);
       const res = await parser.parse();
+      this.debugger.debug(m.MATCH_MATCHHISTORY_PARSESUCCESS, "request", this.debug);
       return res;
     } catch(err) {
-      new ValorantError(err, "request")
+      this.debugger.error(e.MATCH_COMPHISTORY_FAIL, err);
     }
    };
 
@@ -274,11 +274,10 @@ class Client {
    async getCompetitiveHistory(start, end) {
      try {
       checkParams(this, "request");
-      console.log("[Valorant] Getting competitive history...".magenta);
+      this.debugger.debug(m.MATCH_COMPHISTORY_START, "request", this.debug);
 
       if(this.account.id === "") {
-        new ValorantError(e.CLIENT_ACCOUNT_NEW, "reference");
-        console.log("[Valorant] Could not get competitive history!".magenta);
+        this.debugger.debug(e.CLIENT_ACCOUNT_NEW, "client", this.debug);
         return
       };
 
@@ -291,13 +290,14 @@ class Client {
         }
       })).data;
 
-      console.log("[Valorant] Got competitive history! Beginning to parse...".magenta);
+      this.debugger.debug(`${m.MATCH_COMPHISTORY_SUCCESS} ${m.MATCH_MATCHHISTORY_PARSE}`, "reuqest", this.debug);
       const parser = new CompParser(history);
       const res = await parser.parse();
+      this.debugger.debug(m.MATCH_COMPHISTORY_PARSESUCCESS, "request", this.debug);
       return res;
 
      } catch(err) {
-      new ValorantError(err, "request")
+      this.debugger.error(e.MATCH_COMPHISTORY_FAIL, err);
      }
    }
   

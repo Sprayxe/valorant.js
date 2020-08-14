@@ -1,6 +1,6 @@
-const { checkParams } = require("../../managers/parameters");
+const { checkParams } = require("../../helpers/parameters");
 require("colors");
-require("../../../typings/index.js");
+require("../../../typings/index");
 
 class ValorantDebugger {
   constructor();
@@ -20,11 +20,16 @@ class ValorantDebugger {
 
   };
 
+  /**
+   * @param data {Debugger}
+   * @param error {Debugger}
+   * @returns Error
+   */
   error(data="[Valorant] An Error occured!", error) {
     const h = { data: data, error: error };
     checkParams(h, "error");
    
-    throw new Error(`${data}\n{ error: ${error} }`).red);
+    throw new Error(`{ data: ${data}, error: ${error} }`.red);
   }
 }
 module.exports = ValorantDebugger;
