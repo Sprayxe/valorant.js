@@ -20,9 +20,11 @@ class ValorantDebugger {
 
   };
 
-  error(data, error) {
-    checkParams(data, "error");
+  error(data="[Valorant] An Error occured!", error) {
+    const h = { data: data, error: error };
+    checkParams(h, "error");
    
+    throw new Error(`${data}\n{ error: ${error} }`).red);
   }
 }
 module.exports = ValorantDebugger;
