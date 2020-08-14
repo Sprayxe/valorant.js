@@ -1,5 +1,5 @@
 # valorant.js
-## An API Wrapper for valorant with oauth support (now implemented)
+## An API Wrapper for valorant with oauth support
 ### Warning: This lib is currently in development. Some bugs can occur!
 
 ## V1.0.5
@@ -48,6 +48,7 @@ asia pacific would be: `Valorant.region.ap`\
 * [Sprayxe](https://twitter.com/Sprayxe_) `@Sprayxe#0742`
 * [Speeedyyyy](https://twitter.com/Speeedyyyytv) `@Speeedyyyy#2367`
 * [RumbleMike](https://twitter.com/RumbleMikee) `@RumbleMike#5406`
+* A small credit in your project would be appreciated (e.g mentioning lib name would be enough)
 
 ### Dependencies
 * [Axios](https://www.npmjs.com/package/axios)
