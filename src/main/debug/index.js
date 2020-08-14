@@ -1,5 +1,6 @@
 const { checkParams } = require("../../managers/parameters");
 const e = require("../../errors/exceptions");
+const ValorantError("../../errors/index");
 require("colors");
 require("../../../typings/index.js");
 
@@ -21,8 +22,9 @@ class ValorantDebugger {
 
   };
 
-  error(data) {
+  error(data, error) {
     checkParams(data, "error");
+   
   }
 }
 module.exports = ValorantDebugger;
