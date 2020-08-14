@@ -6,7 +6,6 @@ const MatchParser = require("../../parsers/match");
 const CompParser = require("../../parsers/match");
 
 // Valorant Contructors
-const ValorantError = require("../../errors/error");
 const ValorantDebugger = require("../debug/index");
 
 // Enums
