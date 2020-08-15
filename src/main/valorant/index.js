@@ -212,8 +212,8 @@ class Client {
         })).data;
         
         this.account.balance = {
-           "Valorant Points":DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
-           "Radianite Points":DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
+          Valorant_Points:DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
+          Radianite_Points:DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
         };
         this.debugger.debug(m.ACCOUNT_GETWALLET_SUCCESS, "request", this.debug);
         return this.account.balance;
