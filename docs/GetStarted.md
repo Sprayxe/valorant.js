@@ -43,7 +43,7 @@ const Valorant = require("valorant.js");
 </br>
 
 ### Step 3 - Logging in:
-Now we get onto the fun and most important stuff, the login part. Since you required the library, you can make use of it's Client constructor.\
+Now we get onto the fun and most important stuff, the login part. Since you required the library, you can make use of it's [Client Constructor](https://valorant-js.stoplight.io/docs/valorant-js/docs/client/Constructor.md).\
 What it does: It basically creates a "session" from which you can get data about the account and perform actions.\
 Lets create a session, add the following to your code:
 ```js
