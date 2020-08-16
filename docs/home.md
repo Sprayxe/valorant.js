@@ -8,8 +8,8 @@
 </br>
 
 ## Get Started
-* Installation: npm install valorant.js --save`
-* Example: [Click Me](https://stoplight.io)
+* Installation: `npm install valorant.js --save`
+* Tutorial: [Click Me](https://valorant-js.stoplight.io/docs/valorant-js/docs/Home.md)
 </br>
 
 ## Credit
