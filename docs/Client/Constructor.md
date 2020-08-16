@@ -7,12 +7,12 @@ const client = new Valorant.Client({
    debug: boolean
 });
 ```
-`password` - Your account password
-`username` - Your account username
-`region` - Your account region (eu, na, ap)*
-`debug` - Set true if you want more console logging (standard: false)
+`password` - Your account password\
+`username` - Your account username\
+`region` - Your account region (eu, na, ap)*\
+`debug` - Set true if you want more console logging (standard: false)\
 
-# *Use valorant.js region enums:
+### *Use valorant.js region enums:
  * Europe: `Valorant.region.eu`
  * North America: `Valorant.region.na`
  * Asian Pacific: `Valorant.region.ap`
