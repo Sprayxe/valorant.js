@@ -9,7 +9,7 @@
 
 ## Get Started
 * Installation: `npm install valorant.js --save`
-* Tutorial: [Click Me](https://valorant-js.stoplight.io/docs/valorant-js/docs/Home.md)
+* Tutorial: [Click Me](https://valorant-js.stoplight.io/docs/valorant-js/docs/GetStarted.md)
 </br>
 
 ## Credit
