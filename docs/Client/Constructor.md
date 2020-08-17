@@ -1,4 +1,4 @@
-# Client - Constructor
+# Constructor
 ```js
 const client = new Valorant.Client({
    password: string,
@@ -7,10 +7,10 @@ const client = new Valorant.Client({
    debug: boolean
 });
 ```
-`password` - Your account password\
-`username` - Your account username\
-`region` - Your account region (eu, na, ap)*¹\
-`debug` - Set true if you want more console logging (standard: false)
+* `password` - Your account password
+* `username` - Your account username
+* `region` - Your account region (eu, na, ap)*¹
+* `debug` - Set true if you want more console logging (standard: false)
 
 ### *¹ Use valorant.js region enums:
  * Europe: `Valorant.region.eu`
