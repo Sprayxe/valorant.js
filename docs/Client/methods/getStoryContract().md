@@ -1,11 +1,11 @@
-# Endpoints
-Shows locally stored information about the account
+# getStoryContract()
+Gets the current story contract
 </br>
 
 ### Example
 ```js
-console.log(<ValorantClient>.Endpoints)
-// { BASE: "", SHARED: "", AUTH: "" }
+const storycontract = await <ValorantClient>.getStoryContract();
+console.log(storycontract);
 ```
 
 ### Parameters
@@ -13,6 +13,4 @@ console.log(<ValorantClient>.Endpoints)
 
 ### Returns
 * Typeof `object`
-* Valorant endpoints in JSON Format
-
-
+* Raw Story Contract in JSON Format

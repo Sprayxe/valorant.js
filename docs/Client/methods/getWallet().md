@@ -1,11 +1,11 @@
-# Endpoints
-Shows locally stored information about the account
+# getWallet()
+Gets the account wallet and returns it
 </br>
 
 ### Example
 ```js
-console.log(<ValorantClient>.Endpoints)
-// { BASE: "", SHARED: "", AUTH: "" }
+const balance = await <ValorantClient>.getWallet();
+console.log(balance);
 ```
 
 ### Parameters
@@ -13,6 +13,4 @@ console.log(<ValorantClient>.Endpoints)
 
 ### Returns
 * Typeof `object`
-* Valorant endpoints in JSON Format
-
-
+* Account balance in JSON Format
