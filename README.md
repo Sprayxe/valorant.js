@@ -15,7 +15,7 @@ Don't worry, more is coming soon! Just come back here at a later date and check.
 ```npm install valorant.js --save```
 
 
-###Credit
+## Credit
 * [Sprayxe](https://twitter.com/Sprayxe_) `@Sprayxe#0742`
 * [Speeedyyyy](https://twitter.com/Speeedyyyytv) `@Speeedyyyy#2367`
 * [RumbleMike](https://twitter.com/RumbleMikee) `@RumbleMike#5406`
