@@ -27,8 +27,6 @@ class ItemParser {
       const playerTitles = this.data.PlayerTitles;
       const storefrontItems = this.data.StorefrontItems;
 
-      const AllItems = [];
-
       const Characters = [];
       const Maps = [];
       const Chromas = [];
@@ -95,26 +93,28 @@ class ItemParser {
           StorefrontItems.push(element.Name)
       });
 
-      AllItems.push("Characters", Characters);
-      AllItems.push("Maps", Maps);
-      AllItems.push("Chromas", Chromas);
-      AllItems.push("Skins", Skins);
-      AllItems.push("SkinLevels", SkinLevels);
-      AllItems.push("Attachments", Attachments);
-      AllItems.push("Equips", Equips);
-      AllItems.push("Themes", Themes);
-      AllItems.push("GameModes", GameModes);
-      AllItems.push("Sprays", Sprays);
-      AllItems.push("SprayLevels", SprayLevels);
-      AllItems.push("Charms", Charms);
-      AllItems.push("CharmLevels", CharmLevels);
-      AllItems.push("PlayerCards", PlayerCards);
-      AllItems.push("PlayerTitles", PlayerTitles);
-      AllItems.push("StorefrontItems", StorefrontItems);
+      const AllItems = {
+          characters: Characters,
+          maps: Maps,
+          chromas: Chromas,
+          skins: Skins,
+          skinLevels: SkinLevels,
+          attachments: Attachments,
+          equips: Equips,
+          themes: Themes,
+          gamemodes: GameModes,
+          sprays: Sprays,
+          sprayLevels: SprayLevels,
+          charms: Charms,
+          charmLevels: CharmLevels,
+          playerCards: PlayerCards,
+          playerTitles: PlayerTitles,
+          storefrontItems: StorefrontItems
+      };
 
-      return AllItems
-    }
-  }
+      return AllItems;
+    };
+  };
 
 };
 module.exports = ItemParser;
