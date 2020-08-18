@@ -41,12 +41,14 @@ module.exports = {
   MATCH_COMPHISTORY_FAIL: { message: "Failed to get competitive history.", type: "MATCH_COMPHISTORY_FAIL", code: 60002 },
   
   // Information API
-  INFO_GETCONTRACT_FAIL: { message: "Failed to get stoey contract.", type:"INFO_GETCONTRACT_FAIL", code: 70001 },
+  INFO_GETCONTRACT_FAIL: { message: "Failed to get story contract.", type:"INFO_GETCONTRACT_FAIL", code: 70001 },
   
-  //Parsers
+  // Parsers
   MATCH_PARSER_NODATA: { message: "No data to parse has been provided.", type: "MATCH_PARSER_NODATA", code: 80001 },
   
   COMP_PARSER_NODATA: { message: "No data to parse has been provided.", type: "COMP_PARSER_NODATA", code: 80002 },
+
+  GET_ALL_ITEMS_FAIL: { message: "Failes to get all items from the game", type: "GET_ALL_ITEMS_FAIL", code: 80003 },
   
   
 };

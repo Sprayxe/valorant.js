@@ -323,6 +323,26 @@ class Client {
       this.debugger.error(e.MATCH_COMPHISTORY_FAIL, err);
      }
    }
+
+   async getAllItems(){
+    try{
+       const items = (await axios({
+         method: "GET",
+         url: `${this.Endpoints.SHARED}/content-service/v2/content`,
+         headers: {
+           "Authorization":`${this.Authorization.fullToken}`,
+           "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`,
+           "X-Riot-ClientVersion":"release-01.05-shipping-15-460559"
+         },
+         json: true
+       })).data;
+       const parser = new ItemParser(items);
+       const allItems = await parser.parse();
+       return allItems;
+    } catch(err) {
+      this.debugger.error(e.GET_ALL_ITEMS_FAIL, err);
+    }
+  }
   
 }
 
