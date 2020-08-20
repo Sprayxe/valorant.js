@@ -48,7 +48,9 @@ module.exports = {
   
   COMP_PARSER_NODATA: { message: "No data to parse has been provided.", type: "COMP_PARSER_NODATA", code: 80002 },
 
-  GET_ALL_ITEMS_FAIL: { message: "Failes to get all items from the game", type: "GET_ALL_ITEMS_FAIL", code: 80003 },
+  GET_ALL_ITEMS_FAIL: { message: "Failed to get all items from the game", type: "GET_ALL_ITEMS_FAIL", code: 80003 },
+
+  GET_PLAYER_INVENTORY_FAIL: { message: "Failed to get players inventory", type: "GET_PLAYER_INVENTORY_FAIL", code: 80004 },
   
   
 };

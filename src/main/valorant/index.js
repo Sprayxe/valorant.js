@@ -324,6 +324,10 @@ class Client {
      }
    }
 
+   /**
+    * - Gets all items in the game
+    * @returns {object} Parsed Game Items
+    */
    async getAllItems(){
     try{
        const items = (await axios({
@@ -341,6 +345,29 @@ class Client {
        return allItems;
     } catch(err) {
       this.debugger.error(e.GET_ALL_ITEMS_FAIL, err);
+    }
+  }
+
+  /**
+    * - Gets the users inventory
+    * @returns {object} Parsed Inventory
+    */
+  async getPlayerInventory(){
+    try{
+      const items = (await axios({
+        method: "GET",
+        url: `${this.Endpoints.BASE}/personalization/v2/players/${this.account.id}/playerloadout`,
+        headers: {
+          "Authorization":`${this.Authorization.fullToken}`,
+          "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`
+        },
+        json: true
+      })).data;
+      const parser = new ItemParser(items);
+      const playerInventory = await parser.parse();
+      return playerInventory;
+    } catch(err) {
+      this.debugger.error(e.GET_PLAYER_INVENTORY_FAIL, err);
     }
   }
   
