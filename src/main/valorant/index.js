@@ -8,9 +8,6 @@ const CompParser = require("../../parsers/match");
 // Valorant Contructors
 const ValorantDebugger = require("../debug/index");
 
-// Enums
-const region = require("../../../enums/regions");
-
 // Resources
 const { AUTH, ENTITLEMENTS } = require("../../../resources/endpoints");
 
