@@ -9,7 +9,7 @@ const CompParser = require("../../parsers/match");
 const ValorantDebugger = require("../debug/index");
 
 // Resources
-const { AUTH, ENTITLEMENTS } = require("../../../resources/endpoints");
+const { AUTH, ENTITLEMENTS } = require("../../../resources/Endpoints");
 
 // Messages
 const e = require("../../errors/exceptions");
