@@ -42,7 +42,7 @@
 ## Credit
 * [Sprayxe](https://twitter.com/Sprayxe_) `@Sprayxe#0742`
 * [Speeedyyyy](https://twitter.com/Speeedyyyytv) `@Speeedyyyy#2367`
-* [RumbleMike](https://twitter.com/RumbleMikee) `@RumbleMike#5406`
+* [RumbleMike](https://twitter.com/RumbleMikee) `@RumbleMike#5406` (API Documentation)
 * A small credit in your project would be appreciated (e.g mentioning lib name would be enough)
 
 ## Dependencies
