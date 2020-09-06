@@ -2,9 +2,33 @@
 ## An API Wrapper for valorant with oauth support
 ### Warning: This lib is currently in development. Some bugs can occur!
 
-## V1.0.5
-In v1.0.5 Oauth has been added and is now available! For now you can only get the user's wallet.\
-Don't worry, more is coming soon! Just come back here at a later date and check.
+## Example
+```js
+(async () => {
+  
+  const Valorant = require("valorant.js");
+  
+  try {
+  
+    const client = new Valorant.Client({
+      username: "MY_USERNAME", // your username
+      password: "MY_PASSWORD", // your password
+      region: Valorant.region.MY_REGION, // Available regions: eu, na, ap
+      debug: true // wether you want more console output or not
+    });
+    
+    const account_data = await client.login();
+    console.log(account_data);
+    
+    const balance = await client.getWallet();
+    console.log(balance);
+    
+  } catch(err) {
+    console.error(err);
+  };
+  
+})();
+```
 
 ## Support
 * Report Issues/Bugs [here](https://github.com/Sprayxe/valorant.js/issues)
