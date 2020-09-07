@@ -259,7 +259,7 @@ class Client {
      * @param {boolean} parse - Set this to false if you want the raw response
      * @returns {object} Storefront
      */
-    async getStoreFront(parse) {
+    async getStorefront(parse) {
       try {
 
         const store = (await axios({
