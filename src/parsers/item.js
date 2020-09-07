@@ -45,52 +45,68 @@ class ItemParser {
       const StorefrontItems = [];
 
       characters.forEach(element => {
-          Characters.push({ name: element.Name, id: element.ID.toLowerCase() })
+          if(element)
+            Characters.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       maps.forEach(element => {
-          Maps.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Maps.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       chromas.forEach(element => {
-          Chromas.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Chromas.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       skins.forEach(element => {
-          Skins.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Skins.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       skinLevels.forEach(element => {
-          SkinLevels.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          SkinLevels.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       attachments.forEach(element => {
-          Attachments.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Attachments.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       equips.forEach(element => {
-          Equips.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Equips.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       themes.forEach(element => {
-          Themes.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Themes.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       gameModes.forEach(element => {
-          GameModes.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          GameModes.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       sprays.forEach(element => {
-          Sprays.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Sprays.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       sprayLevels.forEach(element => {
-          SprayLevels.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          SprayLevels.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       charms.forEach(element => {
-          Charms.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          Charms.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       charmLevels.forEach(element => {
-          CharmLevels.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          CharmLevels.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       playerCards.forEach(element => {
-          PlayerCards.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          PlayerCards.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       playerTitles.forEach(element => {
-          PlayerTitles.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          PlayerTitles.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
       storefrontItems.forEach(element => {
-          StorefrontItems.push({ name: element.Name, id: element.ID.toLowerCase() })
+        if(element)
+          StorefrontItems.push({ name: element.Name, id: element.ID.toLowerCase() });
       });
 
       const AllItems = {

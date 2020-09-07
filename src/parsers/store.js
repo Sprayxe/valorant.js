@@ -32,7 +32,7 @@ class StoreParser {
         }
       );    
     };
-
+/*
     for(let itemStack in this.data.FeaturedBundle.Bundle) {
       const item = this.data.FeaturedTheme.Bundle[itemStack];
       shop.Featured.push(
@@ -47,7 +47,7 @@ class StoreParser {
           promo: item.IsPromoItem
         }
       );    
-    };
+    };*/
 
     return shop;
   };
@@ -57,9 +57,8 @@ class StoreParser {
     
     for(let storefrontStack in items) {
       const storefront = items[storefrontStack];
-      console.log(storefront.find(item => console.log(item.name)))
 
-      const item = storefront.find(item => item.id === id);
+      const item = storefront.find(item => item?.id === id);
       if(item) {
         return item;
       }

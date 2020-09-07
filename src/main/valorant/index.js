@@ -265,11 +265,12 @@ class Client {
         if(parse === false) return store;
 
         const parser = new StoreParser(store, await this.getAllItems());
-        const storefront = await parser.parse();
+        const storefront = parser.parse();
         return storefront;
         
       } catch(err) {
-        this.debugger.error(e.ACCOUNT_GETSTOREFRONT_FAIL, err);
+        console.log(err)
+        //this.debugger.error(e.ACCOUNT_GETSTOREFRONT_FAIL, err);
       }
     }
 
@@ -387,7 +388,7 @@ class Client {
          headers: {
            "Authorization":`${this.Authorization.fullToken}`,
            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`,
-           "X-Riot-ClientVersion":"release-01.05-shipping-15-460559"
+           "X-Riot-ClientVersion":"release-01.07-shipping-15-467525"
          },
          json: true
        })).data;
