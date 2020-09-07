@@ -132,6 +132,15 @@ class Client {
       }
     }
 
+    /**
+     * - Logs out of valorant account
+     * @returns {boolean} Returns true if it was successful
+     */
+
+    async logout() {
+      // code here lol
+    }
+
 
     /**
      * - Sets account information into an object
