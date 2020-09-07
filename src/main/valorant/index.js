@@ -22,6 +22,9 @@ const axios = require("axios").default;
 // Functions
 const { checkParams } = require("../../helpers/parameters");
 
+// Enums
+const Currency = require("../../../enums/currency");
+
 // Typings
 require("../../../typings/index.js");
 
@@ -209,13 +212,64 @@ class Client {
         })).data;
         
         this.account.balance = {
-          Valorant_Points:DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
-          Radianite_Points:DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
+          ValorantPoints:DATA.Balances["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"],
+          RadianitePoints:DATA.Balances["e59aa87c-4cbf-517a-5983-6e81511be9b7"]
         };
         this.debugger.debug(m.ACCOUNT_GETWALLET_SUCCESS, "request", this.debug);
         return this.account.balance;
       } catch(err) {
         this.debugger.error(e.ACCOUNT_GETWALLET_FAIL, err);
+      }
+    }
+
+    /**
+    * - Gets the users inventory
+    * @returns {object} Parsed Inventory
+    */
+    async getPlayerInventory() {
+      try {
+        const items = (await axios({
+          method: "GET",
+          url: `${this.Endpoints.BASE}/personalization/v2/players/${this.account.id}/playerloadout`,
+          headers: {
+            "Authorization":`${this.Authorization.fullToken}`,
+            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`
+          },
+          json: true
+        })).data;
+        const parser = new ItemParser(items);
+        const playerInventory = await parser.parse();
+        return playerInventory;
+      } catch(err) {
+        this.debugger.error(e.GET_PLAYER_INVENTORY_FAIL, err);
+      }
+    }
+
+    /**
+     * - Gets the users store
+     * @param {boolean} parse - Set this to false if you want the raw response
+     * @returns {object} Storefront
+     */
+    async getStoreFront(parse) {
+      try {
+
+        const store = (await axios({
+          method: "GET",
+          url: `${this.Endpoints.BASE}/store/v2/storefront/${this.account.id}`,
+          headers: {
+            "Authorization": this.Authorization.fullToken,
+            "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+          },
+        })).data;
+
+        if(parse === false) return store;
+
+        const parser = new StoreParser(store, await this.getAllItems());
+        const storefront = await parser.parse();
+        return storefront;
+        
+      } catch(err) {
+        this.debugger.error(e.ACCOUNT_GETSTOREFRONT_FAIL, err);
       }
     }
 
@@ -342,29 +396,6 @@ class Client {
        return allItems;
     } catch(err) {
       this.debugger.error(e.GET_ALL_ITEMS_FAIL, err);
-    }
-  }
-
-  /**
-    * - Gets the users inventory
-    * @returns {object} Parsed Inventory
-    */
-  async getPlayerInventory(){
-    try{
-      const items = (await axios({
-        method: "GET",
-        url: `${this.Endpoints.BASE}/personalization/v2/players/${this.account.id}/playerloadout`,
-        headers: {
-          "Authorization":`${this.Authorization.fullToken}`,
-          "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`
-        },
-        json: true
-      })).data;
-      const parser = new ItemParser(items);
-      const playerInventory = await parser.parse();
-      return playerInventory;
-    } catch(err) {
-      this.debugger.error(e.GET_PLAYER_INVENTORY_FAIL, err);
     }
   }
   

@@ -9,7 +9,7 @@ class ItemParser {
   };
 
   parse() {
-    if(this.data.includes("Characters")){
+    if(JSON.stringify(this.data).includes("Characters")){
       const characters = this.data.Characters;
       const maps = this.data.Maps;
       const chromas = this.data.Chromas;
@@ -45,52 +45,52 @@ class ItemParser {
       const StorefrontItems = [];
 
       characters.forEach(element => {
-          Characters.push(element.Name)
+          Characters.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       maps.forEach(element => {
-          Maps.push(element.Name)
+          Maps.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       chromas.forEach(element => {
-          Chromas.push(element.Name)
+          Chromas.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       skins.forEach(element => {
-          Skins.push(element.Name)
+          Skins.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       skinLevels.forEach(element => {
-          SkinLevels.push(element.Name)
+          SkinLevels.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       attachments.forEach(element => {
-          Attachments.push(element.Name)
+          Attachments.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       equips.forEach(element => {
-          Equips.push(element.Name)
+          Equips.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       themes.forEach(element => {
-          Themes.push(element.Name)
+          Themes.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       gameModes.forEach(element => {
-          GameModes.push(element.Name)
+          GameModes.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       sprays.forEach(element => {
-          Sprays.push(element.Name)
+          Sprays.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       sprayLevels.forEach(element => {
-          SprayLevels.push(element.Name)
+          SprayLevels.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       charms.forEach(element => {
-          Charms.push(element.Name)
+          Charms.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       charmLevels.forEach(element => {
-          CharmLevels.push(element.Name)
+          CharmLevels.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       playerCards.forEach(element => {
-          PlayerCards.push(element.Name)
+          PlayerCards.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       playerTitles.forEach(element => {
-          PlayerTitles.push(element.Name)
+          PlayerTitles.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
       storefrontItems.forEach(element => {
-          StorefrontItems.push(element.Name)
+          StorefrontItems.push({ name: element.Name, id: element.ID.toLowerCase() })
       });
 
       const AllItems = {
@@ -113,7 +113,8 @@ class ItemParser {
       };
 
       return AllItems;
-    } else if(this.data.includes("Subject")){
+    } 
+    else if(JSON.stringify(this.data).includes("Subject")) {
         const Subject = this.data.Subject;
         const Version = this.data.Version;
         const guns = this.data.Guns;

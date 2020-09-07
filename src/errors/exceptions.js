@@ -18,39 +18,36 @@ module.exports = {
   
   // Client Account
   CLIENT_ACCOUNT_NULL : { message: "You are not properly logged in. Please login again.", type: "CLIENT_ACCOUNT_NULL", code: 40001 }, 
-  CLIENT_ACCOUNTID_MISSING : { message: "You are not properly loggrd in! Please login again.", type: "CLIENT_ACCOUNTID_MISSING", code: 40002 },
+  CLIENT_ACCOUNTID_MISSING : { message: "You are not properly logged in! Please login again.", type: "CLIENT_ACCOUNTID_MISSING", code: 40002 },
   CLIENT_ACCOUNT_NEW : { message: "You have to start valorant atleast once before you can use this.", type: "CLIENT_ACCOUNT_NEW", code: 40003},
   CLIENT_SIGNIN_FAIL: { message: "Failed to signin to Riot Services.", type: "CLIENT_SIGNIN_FAIL", code: 40004 },
 
   // User Account
   ACCOUNT_REFRESH_FAIL: { message: "Failed to refresh account data.", type: "ACCOUNT_REFRESH_FAIL", code: 40005 },
   ACCOUNT_GETWALLET_FAIL: { message: "Failed to get account wallet.", type: "ACCOUNT_GETWALLET_FAIL", code: 40006 },
+  ACCOUNT_GETSTOREFRONT_FAIL: { message: "Failed to get account's storefront.", type: "ACCOUNT_GETSTOREFRONT_FAIL", code: 40007 },
+  ACCOUNT_GETWALLET_FAIL: { message: "Failed to get account wallet.", type: "ACCOUNT_GETWALLET_FAIL", code: 40008 },
+  ACCOUNT_GETINVENTORY_FAIL: { message: "Failed to get account inventory", type: "ACCOUNT_GETINVENTORY_FAIL", code: 40009 },
 
   // Valorant Debugger
   DEBUG_DATA_MISSING : { message: "You did not provide any data to log! Please provide some data.", type: "DEBUG_DATA_MISSING", code: 50001 },
   DEBUG_TYPE_MISSING : { message: "You did not provide a type! Please provide a type.", type: "DEBUG_TYPE_MISSING", code: 50002 },
-
   DEBUG_DATA_TYPE : { message: "Debug data to log is not a string!", type: "DEBUG_DATA_TYPE", code: 50003 },
   DEBUG_TYPE_TYPE : { message: "Debug type is not a string!", type: "DEBUG_TYPE_TYPE", code: 50004 },
-
   DEBUG_TYPE_INVALID : { message: "Provided debug type is invalid! Choose between: \"client\" or \"request\" .", type: "DEBUG_TYPE_INVALID", code: 50005 },
 
   // Match API
   MATCH_MATCHHISTORY_FAIL: { message: "Failed to get match history.", type: "MATCH_MATCHHISTORY_FAIL", code: 60001 },
-
   MATCH_COMPHISTORY_FAIL: { message: "Failed to get competitive history.", type: "MATCH_COMPHISTORY_FAIL", code: 60002 },
   
   // Information API
   INFO_GETCONTRACT_FAIL: { message: "Failed to get story contract.", type:"INFO_GETCONTRACT_FAIL", code: 70001 },
+  INFO_GETITEMS_FAIL: { message: "Failed to get all items from the game", type: "INFO_GETITEMS_FAIL", code: 70002 },
   
   // Parsers
   MATCH_PARSER_NODATA: { message: "No data to parse has been provided.", type: "MATCH_PARSER_NODATA", code: 80001 },
   
   COMP_PARSER_NODATA: { message: "No data to parse has been provided.", type: "COMP_PARSER_NODATA", code: 80002 },
-
-  GET_ALL_ITEMS_FAIL: { message: "Failed to get all items from the game", type: "GET_ALL_ITEMS_FAIL", code: 80003 },
-
-  GET_PLAYER_INVENTORY_FAIL: { message: "Failed to get players inventory", type: "GET_PLAYER_INVENTORY_FAIL", code: 80004 },
   
   
 };
