@@ -32,10 +32,10 @@ class StoreParser {
         }
       );    
     };
-/*
-    for(let itemStack in this.data.FeaturedBundle.Bundle) {
-      const item = this.data.FeaturedTheme.Bundle[itemStack];
-      shop.Featured.push(
+
+    for(let itemStack in this.data.FeaturedBundle.Bundle.Items) {
+      const item = this.data.FeaturedBundle.Bundle.Items[itemStack];
+      shop.Bundles.push(
         {
           id: item.Item.ItemID,
           typeId: item.Item.ItemTypeID,
@@ -47,7 +47,7 @@ class StoreParser {
           promo: item.IsPromoItem
         }
       );    
-    };*/
+    };
 
     return shop;
   };
