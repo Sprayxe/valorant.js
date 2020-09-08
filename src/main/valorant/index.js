@@ -134,13 +134,13 @@ class Client {
 
     /**
      * - Logs out of valorant account
-     * @returns {boolean} Returns true if it was successful
-     */
+     * @*returns {boolean} Returns true if it was successful
+     
 
     async logout() {
       // code here lol
     }
-
+    */
 
     /**
      * - Sets account information into an object
@@ -201,11 +201,11 @@ class Client {
      */
     async getWallet() {
       try { 
-        
         this.debugger.debug(m.ACCOUNT_GETWALLET_START, "request", this.debug);
         checkParams(this, "request");
+        
         if(this.account.id === "") {
-          new ValorantError(e.CLIENT_ACCOUNT_NEW, "reference");
+          this.debugger.error(e.CLIENT_ACCOUNT_NEW.message, e.CLIENT_ACCOUNT_NEW);
           console.log("[Valorant] Could not get wallet!".magenta);
           return
         };
@@ -237,6 +237,9 @@ class Client {
     */
     async getPlayerInventory() {
       try {
+        checkParams(this, "request");
+        this.debugger.debug(m.ACCOUNT_GETIINVENTORY_START, "request", this.debug);
+
         const items = (await axios({
           method: "GET",
           url: `${this.Endpoints.BASE}/personalization/v2/players/${this.account.id}/playerloadout`,
@@ -248,9 +251,11 @@ class Client {
         })).data;
         const parser = new ItemParser(items);
         const playerInventory = await parser.parse();
+
+        this.debugger.debug(m.ACCOUNT_GETINVENTORY_SUCCESS, "request", this.debug);
         return playerInventory;
       } catch(err) {
-        this.debugger.error(e.GET_PLAYER_INVENTORY_FAIL, err);
+        this.debugger.error(e.ACCOUNT_GETINVENTORY_FAIL, err);
       }
     }
 
@@ -261,7 +266,9 @@ class Client {
      */
     async getStorefront(parse) {
       try {
-
+        checkParams(this, "request");
+        this.debugger.debug(m.ACCOUNT_GETSTOREFRONT_START, "request", this.debug);
+        
         const store = (await axios({
           method: "GET",
           url: `${this.Endpoints.BASE}/store/v2/storefront/${this.account.id}`,
@@ -275,11 +282,12 @@ class Client {
 
         const parser = new StoreParser(store, await this.getAllItems());
         const storefront = parser.parse();
+
+        this.debugger.debug(m.ACCOUNT_GETSTOREFRONT_SUCCESS, "request", this.debug);
         return storefront;
         
       } catch(err) {
-        console.log(err)
-        //this.debugger.error(e.ACCOUNT_GETSTOREFRONT_FAIL, err);
+        this.debugger.error(e.ACCOUNT_GETSTOREFRONT_FAIL, err);
       }
     }
 
@@ -309,7 +317,7 @@ class Client {
        return res;
       
     } catch(err) {
-      this.debugger.error(e.INFO_GETCONTACT_FAIL, err)
+      this.debugger.error(e.INFO_GETCONTRACT_FAIL, err)
     }
   }
 
@@ -325,7 +333,6 @@ class Client {
     async getMatchHistory(start, end) {
     try {
       checkParams(this, "request");
-
       this.debugger.debug(m.MATCH_MATCHHISTORY_START, "request", this.debug);
 
       if(this.account.id === "") {
@@ -390,7 +397,10 @@ class Client {
     * @returns {object} Parsed Game Items
     */
    async getAllItems(){
-    try{
+    try {
+      checkParams(this, "request");
+      this.debugger.debug(m.INFO_GETALLITEMS_START, "request", this.debug);
+
        const items = (await axios({
          method: "GET",
          url: `${this.Endpoints.SHARED}/content-service/v2/content`,
@@ -403,9 +413,11 @@ class Client {
        })).data;
        const parser = new ItemParser(items);
        const allItems = await parser.parse();
+
+       this.debugger.debug(m.INFO_GETALLITEMS_SUCCESS, "request", this.debug);
        return allItems;
     } catch(err) {
-      this.debugger.error(e.GET_ALL_ITEMS_FAIL, err);
+      this.debugger.error(e.INFO_GETITEMS_FAIL, err);
     }
   }
   

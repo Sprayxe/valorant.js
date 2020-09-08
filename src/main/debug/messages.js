@@ -10,10 +10,25 @@ module.exports = {
     // Account API: Wallet
     ACCOUNT_GETWALLET_START:"Getting account wallet...",
     ACCOUNT_GETWALLET_SUCCESS:"Got account wallet!",
+
+    // Account API: Store
+    ACCOUNT_GETSTOREFRONT_START:"Getting storefront...",
+    ACCOUNT_GETSTOREFRONT_SUCCESS:"Got storefront!",
+
+    // Account API: Inventory
+    ACCOUNT_GETIINVENTORY_START:"Getting account inventory...",
+    ACCOUNT_GETINVENTORY_SUCCESS:"Got account inventory!",
+
+    ACCOUNT_STOREFRONT_PARSE:"Parsing storefront...",
+    ACCOUNT_STOREFRONT_PARSESUCCESS:"Parsed storefront!",
     
     // Information API: Story Contract
     INFO_GETCONTRACT_START:"Getting story contract...",
     INFO_GETCONTRACT_SUCCESS:"Got story contract!",
+
+    // Information API: Items
+    INFO_GETALLITEMS_START:"Getting all items...",
+    INFO_GETALLITEMS_SUCCESS:"Got all items!",
     
     // Match API: Match History
     MATCH_MATCHHISTORY_START:"Getting match history...",

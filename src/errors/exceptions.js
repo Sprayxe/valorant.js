@@ -49,5 +49,6 @@ module.exports = {
   
   COMP_PARSER_NODATA: { message: "No data to parse has been provided.", type: "COMP_PARSER_NODATA", code: 80002 },
   
+  STORE_PARSER_NODATA: { message: "No data to parse has been provided.", type: "STORE_PARSER_NODATA", code: 80003 },
   
 };
