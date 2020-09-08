@@ -18,35 +18,40 @@ class StoreParser {
     };
 
     for(let itemStack in this.data.FeaturedTheme.Items) {
+      if(this.data.FeaturedTheme.Items.length > 0) {
       const item = this.data.FeaturedTheme.Items[itemStack];
-      shop.Featured.push(
-        {
-          id: item.Item.ItemID,
-          typeId: item.Item.ItemTypeID,
-          name: (this.getItem(item.Item.ItemID))?.name,
-          amount: item.Item.Amount,
-          cost: item.BasePrice,
-          currency: Currency[item.CurrencyID],
-          discount: item.DiscountPercent,
-          promo: item.IsPromoItem
-        }
-      );    
+        shop.Featured.push(
+          {
+            id: item.Item.ItemID,
+            typeId: item.Item.ItemTypeID,
+            name: (this.getItem(item.Item.ItemID))?.name,
+            amount: item.Item.Amount,
+            cost: item.BasePrice,
+            currency: Currency[item.CurrencyID],
+            discount: item.DiscountPercent,
+            promo: item.IsPromoItem
+          }
+        ); 
+      }
+         
     };
 
     for(let itemStack in this.data.FeaturedBundle.Bundle.Items) {
+      if(this.data.FeaturedBundle.Bundle.Items.length > 0) {
       const item = this.data.FeaturedBundle.Bundle.Items[itemStack];
-      shop.Bundles.push(
-        {
-          id: item.Item.ItemID,
-          typeId: item.Item.ItemTypeID,
-          name: (this.getItem(item.Item.ItemID))?.name,
-          amount: item.Item.Amount,
-          cost: item.BasePrice,
-          currency: Currency[item.CurrencyID],
-          discount: item.DiscountPercent,
-          promo: item.IsPromoItem
-        }
-      );    
+        shop.Bundles.push(
+          {
+            id: item.Item.ItemID,
+            typeId: item.Item.ItemTypeID,
+            name: (this.getItem(item.Item.ItemID))?.name,
+            amount: item.Item.Amount,
+            cost: item.BasePrice,
+            currency: Currency[item.CurrencyID],
+            discount: item.DiscountPercent,
+            promo: item.IsPromoItem
+          }
+        );
+      }    
     };
 
     return shop;
