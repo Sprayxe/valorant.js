@@ -1,6 +1,6 @@
 const { checkParams } = require("../../helpers/parameters");
 require("colors");
-require("../../../typings/index");
+//require("../../../typings/index");
 
 class ValorantDebugger {
   constructor(){
