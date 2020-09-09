@@ -280,7 +280,7 @@ class Client {
 
         if(parse === false) return store;
 
-        const parser = new StoreParser(store, await this.getAllItems());
+        const parser = new StoreParser(store, await this.getAllItems, this.debugger, this.debug);
         const storefront = parser.parse();
 
         this.debugger.debug(m.ACCOUNT_GETSTOREFRONT_SUCCESS, "request", this.debug);
