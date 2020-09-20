@@ -407,7 +407,7 @@ class Client {
          headers: {
            "Authorization":`${this.Authorization.fullToken}`,
            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`,
-           "X-Riot-ClientVersion":"release-01.07-shipping-15-467525"
+           "X-Riot-ClientVersion":"release-01.08-shipping-10-471230"
          },
          json: true
        })).data;
