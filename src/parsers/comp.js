@@ -32,7 +32,7 @@ class CompParser {
            const date = new Date(parseInt(m.MatchStartTime));
            
            if(m.MatchID) {
-             parsed.push({ "MatchID":m.MatchID, "MatchStartTime":date, "TierAfterUpdate":m.TierAfterUpdate, "CompetitiveMovement":m.CompetitiveMovement });
+            parsed.push({ "MatchID":m.MatchID, "MatchStartTime":date, "TierAfterUpdate":m.TierAfterUpdate, "CompetitiveMovement":m.CompetitiveMovement });
              length--;
            }
        

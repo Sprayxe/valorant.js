@@ -390,6 +390,15 @@ class Client {
      } catch(err) {
       this.debugger.error(e.MATCH_COMPHISTORY_FAIL, err);
      }
+
+     const pointsCompetitive = (await axios({
+       method: "GET"
+       url: `${this.Endpoints.BASE}/mmr/v1/players/${this.account.id}/competitiveupdates?startIndex=${start || 0}&endIndex=${end || 10}`,
+       headers: {
+        "Authorization":this.Authorization.fullToken,
+        "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+       }
+     })).data;
    }
 
    /**
