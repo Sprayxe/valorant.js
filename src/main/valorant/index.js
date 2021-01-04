@@ -393,6 +393,39 @@ class Client {
    }
 
    /**
+    * -Get New Points System of Competitive
+    */
+
+   async getCompetitiveHistory(start, end) {
+    try {
+     checkParams(this, "request");
+     this.debugger.debug(m.MATCH_COMPHISTORY_START, "request", this.debug);
+
+     if(this.account.id === "") {
+       this.debugger.debug(e.CLIENT_ACCOUNT_NEW, "client", this.debug);
+       return
+     };
+
+     const history = (await axios({
+       method: "GET",
+       url: `${this.Endpoints.BASE}/mmr/v1/players/${this.account.id}/competitiveupdates?startIndex=${start || 0}&endIndex=${end || 10}`,
+       headers: {
+        "Authorization":this.Authorization.fullToken,
+        "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+       }
+     })).data;
+
+     this.debugger.debug(`${m.MATCH_COMPHISTORY_SUCCESS} ${m.MATCH_COMPHISTORY_PARSE}`, "request", this.debug);
+     const res = await new CompParser(this.debugger, this.debug).parse(history);
+     this.debugger.debug(m.MATCH_COMPHISTORY_PARSESUCCESS, "request", this.debug);
+     return res;
+
+    } catch(err) {
+     this.debugger.error(e.MATCH_COMPHISTORY_FAIL, err);
+    }
+  }
+
+   /**
     * - Gets all items in the game
     * @returns {object} Parsed Game Items
     */
