@@ -26,6 +26,7 @@ class StoreParser {
       for(let itemStack in this.data.FeaturedTheme.Items) {
         if(this.data.FeaturedTheme.Items.length > 0) {
         const item = this.data.FeaturedTheme.Items[itemStack];
+          const it
           shop.Featured.push(
             {
               id: item.Item.ItemID,
@@ -45,11 +46,12 @@ class StoreParser {
       for(let itemStack in this.data.FeaturedBundle.Bundle.Items) {
         if(this.data.FeaturedBundle.Bundle.Items.length > 0) {
         const item = this.data.FeaturedBundle.Bundle.Items[itemStack];
+        const it = this.getItem(item.Item.ItemID);
           shop.Bundles.push(
             {
               id: item.Item.ItemID,
               typeId: item.Item.ItemTypeID,
-              name: (this.getItem(item.Item.ItemID))?.name,
+              name: it ? it.name : "unknown",
               amount: item.Item.Amount,
               cost: item.BasePrice,
               currency: Currency[item.CurrencyID],
