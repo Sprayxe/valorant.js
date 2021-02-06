@@ -75,7 +75,7 @@ class StoreParser {
     for (let storefrontStack in items) {
       const storefront = items[storefrontStack];
 
-      const item = storefront.find(item => item?.id === id);
+      const item = storefront.find(item => item && item.id === id);
       if (item) {
         return item;
       }
