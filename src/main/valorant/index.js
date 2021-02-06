@@ -28,6 +28,8 @@ const Currency = require("../../../enums/currency");
 // Typings
 //require("../../../typings/index.js");
 
+const clientPlatform = "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
+
 class Client {
   /**
    * @param config {Config}
@@ -51,6 +53,7 @@ class Client {
       balance: {}
     };
   }
+
 
   // Oauth & Account 
 
@@ -116,6 +119,7 @@ class Client {
         })).data;
 
         const entitlementsToken = entitlementsData["entitlements_token"]
+        
 
         this.Authorization = {
           fullToken: `Bearer ${accessToken}`,
@@ -170,7 +174,7 @@ class Client {
             url: `${this.Endpoints.BASE}/name-service/v2/players`,
             headers: {
               "Authorization":this.Authorization.fullToken,
-              "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+              "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
             },
             data: [
               userid.sub
@@ -216,7 +220,8 @@ class Client {
           headers: {
             "content-type":"application/json",
             "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
-            "Authorization":this.Authorization.fullToken
+            "Authorization":this.Authorization.fullToken,
+            "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
           }
         })).data;
         
@@ -245,7 +250,8 @@ class Client {
           url: `${this.Endpoints.BASE}/personalization/v2/players/${this.account.id}/playerloadout`,
           headers: {
             "Authorization":`${this.Authorization.fullToken}`,
-            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`
+            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`,
+            "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
           },
           json: true
         })).data;
@@ -274,7 +280,8 @@ class Client {
           url: `${this.Endpoints.BASE}/store/v2/storefront/${this.account.id}`,
           headers: {
             "Authorization": this.Authorization.fullToken,
-            "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+            "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
+            "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
           },
         })).data;
 
@@ -309,7 +316,8 @@ class Client {
         url: `${this.Endpoints.BASE}/contract-definitions/v2/definitions/story`,
         headers: {
         "Authorization":this.Authorization.fullToken,
-        "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+        "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
+        "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
         }
       })).data;
     
@@ -345,7 +353,8 @@ class Client {
         url: `${this.Endpoints.BASE}/match-history/v1/history/${this.account.id}?startIndex=${start || 0}&endIndex=${end || 10}`,
         headers: {
          "Authorization":this.Authorization.fullToken,
-         "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+         "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
+         "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
         }
       })).data;
 
@@ -378,7 +387,8 @@ class Client {
         url: `${this.Endpoints.BASE}/mmr/v1/players/${this.account.id}/competitiveupdates?startIndex=${start || 0}&endIndex=${end || 10}`,
         headers: {
          "Authorization":this.Authorization.fullToken,
-         "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+         "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
+         "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
         }
       })).data;
 
@@ -396,7 +406,7 @@ class Client {
     * -Get New Points System of Competitive
     */
 
-   async getCompetitiveHistory(start, end) {
+   async getCompetitiveHistoryELO(start, end) {
     try {
      checkParams(this, "request");
      this.debugger.debug(m.MATCH_COMPHISTORY_START, "request", this.debug);
@@ -411,7 +421,8 @@ class Client {
        url: `${this.Endpoints.BASE}/mmr/v1/players/${this.account.id}/competitiveupdates?startIndex=${start || 0}&endIndex=${end || 10}`,
        headers: {
         "Authorization":this.Authorization.fullToken,
-        "X-Riot-Entitlements-JWT":this.Authorization.RSOToken
+        "X-Riot-Entitlements-JWT":this.Authorization.RSOToken,
+        "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
        }
      })).data;
 
@@ -440,7 +451,8 @@ class Client {
          headers: {
            "Authorization":`${this.Authorization.fullToken}`,
            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`,
-           "X-Riot-ClientVersion":"release-01.08-shipping-10-471230"
+           "X-Riot-ClientVersion":"release-02.01-shipping-6-511946",
+           "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
          },
          json: true
        })).data;
