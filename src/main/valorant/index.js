@@ -451,7 +451,7 @@ class Client {
          headers: {
            "Authorization":`${this.Authorization.fullToken}`,
            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`,
-           "X-Riot-ClientVersion":"release-02.01-shipping-6-511946",
+           "X-Riot-ClientVersion":"release-02.05-shipping-4-533692",
            "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
          },
          json: true
