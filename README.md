@@ -41,7 +41,7 @@
 
 ## Credits
 * [Sprayxe](https://twitter.com/Sprayxe_) `@Sprayxe#0742`
-* [Speeedyyyy](https://twitter.com/Speeedyyyytv) `@Speeedyyyy#2367`
+* [Speeedyyyy](https://twitter.com/Speeedyyyytv) `@Speeedyyyy#6932`
 * [RumbleMike](https://twitter.com/RumbleMikee) `@RumbleMike#5406` (API Documentation)
 * A small credit in your project would be appreciated (e.g mentioning lib name would be enough)
 
