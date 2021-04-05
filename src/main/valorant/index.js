@@ -55,6 +55,24 @@ class Client {
   }
 
 
+ //First let's get the version of the client to get some info like all the items
+ /* WIP
+ async getClientVersion(){
+   try{
+     console.log("Trying to get the Game Version...");
+     
+     const GameVersion = await axios({
+       method: 'get',
+       url: 'https://valorant-api.com/v1/version',
+       data: {}
+     }).data;
+     return GameVersion
+
+   }catch(err) {
+    this.debugger.error(e.GET_GAMEVERSION_FAIL, err)
+   }
+}*/
+
   // Oauth & Account 
 
     /**
@@ -451,7 +469,7 @@ class Client {
          headers: {
            "Authorization":`${this.Authorization.fullToken}`,
            "X-Riot-Entitlements-JWT":`${this.Authorization.RSOToken}`,
-           "X-Riot-ClientVersion":"release-02.05-shipping-4-533692",
+           "X-Riot-ClientVersion":"release-02.06-shipping-13-539501",
            "X-Riot-ClientPlatform":"ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
          },
          json: true
