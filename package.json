@@ -1,27 +1,17 @@
 {
   "name": "valorant.js",
-  "version": "1.3.6",
-  "description": "A powerful valorant api wrapper",
-  "main": "index.js",
+  "version": "1.4.0",
+  "description": "API Wrapper for valorant with oauth support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sprayxe/valorant.js.git"
-  },
-  "keywords": [
-    "valorant",
-    "api"
-  ],
-  "author": "Sprayxe, Speeedyyy",
+  "author": "Sprayxe, Speeedyyyy",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Sprayxe/valorant.js/issues"
-  },
-  "homepage": "https://github.com/Sprayxe/valorant.js#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "colors": "^1.4.0"
+    "querystring": "^0.2.1",
+    "typescript": "^4.2.4"
   }
 }

@@ -1,8 +1,0 @@
-# Packages
-node_modules/
-
-# Other
-.vscode/
-
-# Docs
-docs/
