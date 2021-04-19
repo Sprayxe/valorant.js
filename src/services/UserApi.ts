@@ -85,6 +85,9 @@ export class UserApi {
             })
             .build();
         const loginRes = (await this._client.http.sendRequest(loginReq)).data;
+        if (!loginRes.response) {
+            throw new Error("Login failed: Invalid credentials!");
+        }
 
         const bodyStr = loginRes.response.parameters.uri.split("#")[1];
         const bodyObj = querystring.parse(bodyStr) as unknown;

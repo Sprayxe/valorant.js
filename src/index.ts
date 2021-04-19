@@ -108,7 +108,7 @@ export class Http extends AbstractHttp {
             }
             return await Axios(request);
         } catch (e) {
-            console.error(e ? e.response : e);
+            console.error(e.response ? e.response : e);
             throw e;
         }
     }
