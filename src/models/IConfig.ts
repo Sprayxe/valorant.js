@@ -1,4 +1,4 @@
-import { Region } from "../Region";
+import { Region } from "../index";
 
 export interface IConfig {
     /**

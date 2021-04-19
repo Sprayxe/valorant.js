@@ -3,12 +3,12 @@ import { ContentApi } from "./services/ContentApi";
 import { HistoryApi } from "./services/HistoryApi";
 import { UserApi } from "./services/UserApi";
 import { IAccount } from "./models/IAccount";
-import { Region } from "./Region";
 import { IConfig } from "./models/IConfig";
 import { IAuthorization } from "./models/IAuthorization";
 import { AbstractHttp } from "./Http";
 import Axios, { AxiosResponse } from "axios";
 import { Request, RequestBuilder } from "./Request";
+import { Endpoints } from "./resources/Endpoints";
 
 export class RiotApiClient {
     #config: IConfig
@@ -112,4 +112,18 @@ export class Http extends AbstractHttp {
             throw e;
         }
     }
+}
+
+export class Region {
+    BaseUrl: string
+    SharedUrl: string
+
+    constructor(baseUrl: string, sharedUrl: string) {
+        this.BaseUrl = baseUrl;
+        this.SharedUrl = sharedUrl;
+    }
+
+    static EU = new Region(Endpoints.EuBase, Endpoints.EuShared);
+    static NA = new Region(Endpoints.NaBase, Endpoints.NaShared);
+    static AP = new Region(Endpoints.ApBase, Endpoints.ApShared);
 }

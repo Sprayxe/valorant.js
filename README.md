@@ -17,7 +17,7 @@
     await client.login();
     console.log(client.user);
     
-    const balance = await client.userApi.getWallet();
+    const balance = await client.userApi.getWallet(client.user.Subject);
     console.log(balance);
   } catch(err) {
     console.error(err);
