@@ -8,7 +8,7 @@
   const { RiotApiClient, Region } = require("valorant.js");
   
   try {
-    const client = new Valorant.Client({
+    const client = new RiotApiClient({
       username: "MY_USERNAME", // your username
       password: "MY_PASSWORD", // your password
       region: Region.MY_REGION, // Available regions: EU, NA, AP
