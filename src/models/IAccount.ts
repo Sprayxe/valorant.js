@@ -11,7 +11,7 @@ export interface IAccount {
     /**
      * - Tag of your account
      */
-    tagLine: string
+    TagLine: string
     /**
      * - Displayname of your account
      * @warning DisplayName can be empty
