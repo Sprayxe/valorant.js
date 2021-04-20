@@ -25,7 +25,7 @@ export class StoreParser {
                     typeId: item.Item.ItemTypeID,
                     name: it ? it.skin.displayName : "Unknown",
                     quantity: item.Item.Amount,
-                    currency: { name: Currency[item.CurrencyID], id: item.CurrencyID, cost: item.BasePrice },
+                    cost: { name: Currency[item.CurrencyID], id: item.CurrencyID, cost: item.BasePrice },
                     discount: item.DiscountPercent,
                     isPromoItem: item.IsPromoItem
                 })
