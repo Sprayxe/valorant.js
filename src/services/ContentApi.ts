@@ -49,22 +49,17 @@ export class ContentApi {
     /**
      * - Gets all items
      */
-    async getContent(useRiot: boolean): Promise<any> {
-        if (useRiot) {
-            const contentReq = new RequestBuilder()
-                .setMethod("GET")
-                .setUrl(this._client.region.SharedUrl + "/content-service/v2/content")
-                .addHeader("X-Riot-ClientVersion", this._client.clientVersion)
-                .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
-                .build();
+    async getContent(): Promise<any> {
+        const contentReq = new RequestBuilder()
+            .setMethod("GET")
+            .setUrl(this._client.region.SharedUrl + "/content-service/v2/content")
+            .addHeader("X-Riot-ClientVersion", this._client.clientVersion)
+            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
+            .build();
 
-            const contentRes = (await this._client.http.sendRequest(contentReq)).data;
-            const parser = new ItemParser(contentRes);
+        const contentRes = (await this._client.http.sendRequest(contentReq)).data;
+        const parser = new ItemParser(contentRes);
 
-            return parser.parse();
-        } else {
-            const { data } = await axios.get("https://valorant-api.com/v1/weapons");
-            return data.data;
-        }
+        return parser.parse();
     }
 }

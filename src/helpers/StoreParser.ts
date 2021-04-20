@@ -1,14 +1,17 @@
 import { IStorefront } from "../models/IStorefront";
 import { IStorefrontParsed } from "../models/IStorefrontParsed";
 import Currency from "../resources/Currency";
+import { IStoreOffer } from "../models/IStoreOffers";
 
 export class StoreParser {
     data: IStorefront
     contentList: any[]
+    offerList: IStoreOffer[]
 
-    constructor(data: IStorefront, contentList: any) {
+    constructor(data: IStorefront, contentList: any, offerList: IStoreOffer[]) {
         this.data = data;
         this.contentList = contentList;
+        this.offerList = offerList;
     }
 
     parse(): IStorefrontParsed {
@@ -23,7 +26,7 @@ export class StoreParser {
                 featured.push({
                     id: item.Item.ItemID,
                     typeId: item.Item.ItemTypeID,
-                    name: it ? it.skin.displayName : "Unknown",
+                    name: it ? it.item.name : "Unknown",
                     quantity: item.Item.Amount,
                     cost: { name: Currency[item.CurrencyID], id: item.CurrencyID, amount: item.BasePrice },
                     discount: item.DiscountPercent,
@@ -40,7 +43,7 @@ export class StoreParser {
                     return {
                         id: item.ItemID,
                         typeId: item.ItemTypeID,
-                        name: it ? it.skin.displayName : "Unknown",
+                        name: it ? it.item.name : "Unknown",
                         amount: item.Quantity
                     }
                 });
@@ -69,10 +72,9 @@ export class StoreParser {
             skinPanel.SingleItemOffers.forEach(s => {
                 const it = this.getItem(s);
                 skins.push({
-                    name: it ? it.skin.displayName : "Unknown",
+                    name: it ? it.item.name : "Unknown",
                     id: s,
-                    cost: { id: "85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741", name: "Valorant Points",
-                        amount: it.entry.shopData ? it.entry.shopData.cost : -1 }
+                    cost: it.offer.Cost
                 })
             })
         }
@@ -85,19 +87,17 @@ export class StoreParser {
     }
 
     private getItem(id: string) {
-        // TODO this code sucks lmao
         const items = this.contentList;
-        for (const entryStack in items) {
-            const entry = items[entryStack];
-            const item = entry.skins.find(e => e.levels && e.levels.find(l => l && l.uuid === id));
+        for (let storefrontStack in items) {
+            const storefront = items[storefrontStack];
+            const item = storefront.find(item => item && item.id === id);
             if (item) {
-                const skin = item.levels.find(l => l && l.uuid === id)
+                const offer = this.offerList.find(o => o.Rewards.map(r => r.ItemID).includes(id))
                 return {
-                    entry,
-                    skin
+                    item,
+                    offer
                 }
             }
         }
-        return null
     }
 }

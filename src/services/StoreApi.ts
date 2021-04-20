@@ -55,7 +55,9 @@ export class StoreApi {
         if (!parse)
             return storeRes;
 
-        const parser = new StoreParser(storeRes, await this._client.contentApi.getContent(false));
+        const content = await this._client.contentApi.getContent();
+        const offers = await this.getStoreOffers();
+        const parser = new StoreParser(storeRes, content, offers.Offers);
         return parser.parse();
     }
 
