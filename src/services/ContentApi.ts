@@ -2,6 +2,7 @@ import { RiotApiClient } from "../index";
 import { RequestBuilder } from "../Request";
 import { ItemParser } from "../helpers/ItemParser";
 import axios from "axios";
+import { IItemUpgrades } from "../models/IItemUpgrades";
 
 export class ContentApi {
     private _client: RiotApiClient
@@ -10,7 +11,7 @@ export class ContentApi {
     }
 
     /**
-     * - Gets the current story contract
+     * - Gets the current story contract definitions
      */
     async getStoryContract() {
         const storyReq = new RequestBuilder()
@@ -19,6 +20,30 @@ export class ContentApi {
             .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(storyReq)).data;
+    }
+
+    /**
+     * - Gets a player's contract
+     */
+    async getContractByPlayer(playerId: string) {
+        const storyReq = new RequestBuilder()
+            .setUrl(this._client.region.BaseUrl + `/contracts/v1/contracts/${playerId}`)
+            .setMethod("GET")
+            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
+            .build();
+        return (await this._client.http.sendRequest(storyReq)).data;
+    }
+
+    /**
+     * - Gets item upgrades
+     */
+    async getItemUpgrades(): Promise<IItemUpgrades> {
+        const upgradeReq = new RequestBuilder()
+            .setUrl(this._client.region.BaseUrl + "/contract-definitions/v3/item-upgrades")
+            .setMethod("GET")
+            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
+            .build();
+        return (await this._client.http.sendRequest(upgradeReq)).data;
     }
 
     /**

@@ -1,21 +1,31 @@
 import { RiotApiClient } from "../index";
+import { IUserInfo } from "../models/IUserInfo";
 import { RequestBuilder } from "../Request";
 import { Endpoints } from "../resources/Endpoints";
-import querystring from "querystring";
 import { IAccessToken } from "../models/IAccessToken";
+import querystring from "querystring";
 import { IRsoToken } from "../models/IRsoToken";
-import { IUserInfo } from "../models/IUserInfo";
-import { ICurrency } from "../models/ICurrency";
-import Currency from "../resources/Currency";
 import { ItemParser } from "../helpers/ItemParser";
-import { IStorefront } from "../models/IStorefront";
-import { IStorefrontParsed } from "../models/IStorefrontParsed";
-import { StoreParser } from "../helpers/StoreParser";
+import { IAccount } from "../models/IAccount";
+import { InvalidCredsException } from "../models/Exceptions";
 
-export class UserApi {
+export class PlayerApi {
     private _client: RiotApiClient
     constructor(client: RiotApiClient) {
         this._client = client;
+    }
+
+    /**
+     * - Gets an account by id
+     * @param accountIds Array of account ids to get
+     */
+    async getAccountById(accountIds: string[]): Promise<IAccount[]> {
+        const accReq = new RequestBuilder()
+            .setUrl(this._client.region.BaseUrl + "/name-service/v2/players")
+            .setMethod("PUT")
+            .setBody(accountIds)
+            .build();
+        return (await this._client.http.sendRequest(accReq)).data;
     }
 
     /**
@@ -28,20 +38,6 @@ export class UserApi {
             .setBody({})
             .build();
         return (await this._client.http.sendRequest(userReq)).data;
-    }
-
-    /**
-     * - Kills an access token
-     * @param cookies Cookies of session
-     */
-    async killAccessToken(cookies: string) {
-        /*const delReq = new RequestBuilder()
-            .setMethod("DELETE")
-            .setUrl(Endpoints.Auth + "/api/v1/authorization")
-            .addHeader("cookie", cookies)
-            .build();
-        return (await this._client.http.sendRequest(delReq));*/
-        throw new Error("Not implemented.")
     }
 
     /**
@@ -64,6 +60,7 @@ export class UserApi {
             .build();
         const cookieRes = await this._client.http.sendRequest(cookieReq);
 
+        // TODO: use tough-cookie
         const cookies = [];
         const parsedCookies = (JSON.stringify(cookieRes.headers["set-cookie"])).split("=");
         parsedCookies.forEach(a => {
@@ -84,14 +81,14 @@ export class UserApi {
                 "password": password
             })
             .build();
+
         const loginRes = (await this._client.http.sendRequest(loginReq)).data;
         if (!loginRes.response) {
-            throw new Error("Login failed: Invalid credentials!");
+            throw new InvalidCredsException(username, "Login failed: Invalid credentials!");
         }
 
         const bodyStr = loginRes.response.parameters.uri.split("#")[1];
         const bodyObj = querystring.parse(bodyStr) as unknown;
-        bodyObj["cookies"] = cookieAuth;
 
         return bodyObj as IAccessToken;
     }
@@ -112,33 +109,6 @@ export class UserApi {
     }
 
     /**
-     * - Gets the users wallet (valorant points etc.)
-     * @param accountId Account to get the wallet for
-     */
-    async getWallet(accountId: string): Promise<ICurrency[]> {
-        const currencies = [];
-
-        const walletReq = new RequestBuilder()
-            .setMethod("GET")
-            .setUrl(this._client.region.BaseUrl + "/store/v1/wallet/" + accountId)
-            .addHeader("content-type", "application/json")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
-            .build();
-        const walletRes = (await this._client.http.sendRequest(walletReq)).data;
-
-        const walletMap = new Map<string, number>(Object.entries(walletRes.Balances));
-        walletMap.forEach((v, k) => {
-            currencies.push({
-                id: k,
-                name: Currency[k] || "Unknown. Please contact the library developer.",
-                amount: v
-            });
-        })
-
-        return currencies;
-    }
-
-    /**
      * - Gets the players inventory
      * @param accountId Account to get the inventory for
      */
@@ -150,25 +120,6 @@ export class UserApi {
             .build();
         const itemRes = (await this._client.http.sendRequest(itemReq)).data;
         const parser = new ItemParser(itemRes);
-        return parser.parse();
-    }
-
-    /**
-     * - Gets the storefront
-     * @param accountId Account to get storefront for
-     * @param parse Wether to parse the shop or not
-     */
-    async getStorefront(accountId: string, parse: boolean): Promise<IStorefront | IStorefrontParsed> {
-        const storeReq = new RequestBuilder()
-            .setUrl(this._client.region.BaseUrl + "/store/v2/storefront/" + accountId)
-            .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
-            .build();
-        const storeRes = (await this._client.http.sendRequest(storeReq)).data;
-        if (!parse)
-            return storeRes;
-
-        const parser = new StoreParser(storeRes, await this._client.contentApi.getContent(false));
         return parser.parse();
     }
 }

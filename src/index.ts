@@ -1,7 +1,8 @@
-import { AccountApi } from "./services/AccountApi";
 import { ContentApi } from "./services/ContentApi";
-import { HistoryApi } from "./services/HistoryApi";
-import { UserApi } from "./services/UserApi";
+import { MatchApi } from "./services/MatchApi";
+import { PlayerApi } from "./services/PlayerApi";
+import { StoreApi } from "./services/StoreApi";
+import { PartyApi } from "./services/PartyApi";
 import { IAccount } from "./models/IAccount";
 import { IConfig } from "./models/IConfig";
 import { IAuthorization } from "./models/IAuthorization";
@@ -9,6 +10,7 @@ import { AbstractHttp } from "./Http";
 import Axios, { AxiosResponse } from "axios";
 import { Request, RequestBuilder } from "./Request";
 import { Endpoints } from "./resources/Endpoints";
+import { ApiClientException } from "./models/Exceptions";
 
 export class RiotApiClient {
     #config: IConfig
@@ -16,10 +18,11 @@ export class RiotApiClient {
     clientVersion: string
     region: Region
     http: Http
-    accountApi: AccountApi
     contentApi: ContentApi
-    historyApi: HistoryApi
-    userApi: UserApi
+    matchApi: MatchApi
+    playerApi: PlayerApi
+    storeApi: StoreApi
+    partyApi: PartyApi
     user: IAccount
 
     /**
@@ -44,14 +47,14 @@ export class RiotApiClient {
     async login(): Promise<RiotApiClient> {
         // login and setup some stuff
         (this.auth as any) = {};
-        this.auth.accessToken = await this.userApi.getAccessToken(this.#config.username, this.#config.password);
-        this.auth.rsoToken = await this.userApi.getRsoToken(this.auth.accessToken);
+        this.auth.accessToken = await this.playerApi.getAccessToken(this.#config.username, this.#config.password);
+        this.auth.rsoToken = await this.playerApi.getRsoToken(this.auth.accessToken);
         this.buildServices();
         // get user
-        const userInfo = await this.userApi.getInfo()
+        const userInfo = await this.playerApi.getInfo()
         if (userInfo.sub == "")
             throw new Error("Account ID was empty. Please start the game atleast once!");
-        this.user = (await this.accountApi.getAccountById([userInfo.sub]))[0];
+        this.user = (await this.playerApi.getAccountById([userInfo.sub]))[0];
         // finish stuff
         this.clientVersion = await this.getClientVersion();
         this.buildServices();
@@ -83,10 +86,11 @@ export class RiotApiClient {
      * @warning You probably shouldn't call this method
      */
     buildServices() {
-        this.accountApi = new AccountApi(this);
+        this.storeApi = new StoreApi(this);
+        this.partyApi = new PartyApi(this);
+        this.playerApi = new PlayerApi(this);
         this.contentApi = new ContentApi(this);
-        this.historyApi = new HistoryApi(this);
-        this.userApi = new UserApi(this);
+        this.matchApi = new MatchApi(this);
         this.http = new Http(this.auth);
     }
 }
@@ -98,6 +102,11 @@ export class Http extends AbstractHttp {
         this.auth = authorization;
     }
 
+    /**
+     * - Sends a request
+     * @param request Request to send
+     * @throws {ApiClientException}
+     */
     async sendRequest(request: Request): Promise<AxiosResponse> {
         try {
             if (this.auth != null && this.auth.accessToken != null) {
@@ -108,8 +117,9 @@ export class Http extends AbstractHttp {
             }
             return await Axios(request);
         } catch (e) {
-            console.error(e.response ? e.response : e);
-            throw e;
+            throw e.response
+                ? new ApiClientException(e)
+                : e;
         }
     }
 }
@@ -117,13 +127,17 @@ export class Http extends AbstractHttp {
 export class Region {
     BaseUrl: string
     SharedUrl: string
+    PartyUrl: string
+    Name: string
 
-    constructor(baseUrl: string, sharedUrl: string) {
+    constructor(baseUrl: string, sharedUrl: string, partyUrl: string, name: string) {
         this.BaseUrl = baseUrl;
         this.SharedUrl = sharedUrl;
+        this.PartyUrl = partyUrl;
+        this.Name = name;
     }
 
-    static EU = new Region(Endpoints.EuBase, Endpoints.EuShared);
-    static NA = new Region(Endpoints.NaBase, Endpoints.NaShared);
-    static AP = new Region(Endpoints.ApBase, Endpoints.ApShared);
+    static EU = new Region(Endpoints.EuBase, Endpoints.EuShared, Endpoints.EuParty, "eu");
+    static NA = new Region(Endpoints.NaBase, Endpoints.NaShared, Endpoints.NaParty, "na");
+    static AP = new Region(Endpoints.ApBase, Endpoints.ApShared, Endpoints.ApParty, "ap");
 }
