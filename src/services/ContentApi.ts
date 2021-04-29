@@ -17,7 +17,6 @@ export class ContentApi {
         const storyReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + "/contract-definitions/v2/definitions/story")
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(storyReq)).data;
     }
@@ -29,7 +28,6 @@ export class ContentApi {
         const storyReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + `/contracts/v1/contracts/${playerId}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(storyReq)).data;
     }
@@ -41,7 +39,6 @@ export class ContentApi {
         const upgradeReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + "/contract-definitions/v3/item-upgrades")
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(upgradeReq)).data;
     }
@@ -53,8 +50,6 @@ export class ContentApi {
         const contentReq = new RequestBuilder()
             .setMethod("GET")
             .setUrl(this._client.region.SharedUrl + "/content-service/v2/content")
-            .addHeader("X-Riot-ClientVersion", this._client.clientVersion)
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
 
         const contentRes = (await this._client.http.sendRequest(contentReq)).data;

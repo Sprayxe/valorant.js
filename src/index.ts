@@ -28,7 +28,7 @@ export class RiotApiClient {
     /**
      * - Client platform id
      */
-    public static XRiotClientPlatform = "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9";
+    public static readonly XRiotClientPlatform = "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9";
 
     /**
      * - Initiates the base client
@@ -91,15 +91,17 @@ export class RiotApiClient {
         this.playerApi = new PlayerApi(this);
         this.contentApi = new ContentApi(this);
         this.matchApi = new MatchApi(this);
-        this.http = new Http(this.auth);
+        this.http = new Http(this.auth, this.clientVersion);
     }
 }
 
 export class Http extends AbstractHttp {
     private readonly auth?: IAuthorization = null;
-    constructor(authorization?: IAuthorization) {
+    private readonly version?: string = null;
+    constructor(authorization?: IAuthorization, version?: string) {
         super();
         this.auth = authorization;
+        this.version = version;
     }
 
     /**
@@ -109,13 +111,19 @@ export class Http extends AbstractHttp {
      */
     async sendRequest(request: Request): Promise<AxiosResponse> {
         try {
+            const modifiedReq = RequestBuilder.fromRequest(request);
+
             if (this.auth != null && this.auth.accessToken != null) {
-                const authReq = RequestBuilder.fromRequest(request)
-                    .addHeader("Authorization", `${this.auth.accessToken.token_type} ${this.auth.accessToken.access_token}`);
-                if (this.auth.rsoToken != null) authReq.addHeader("X-Riot-Entitlements-JWT", this.auth.rsoToken.entitlements_token)
-                request = authReq.build();
+                modifiedReq.addHeader("Authorization", `${this.auth.accessToken.token_type} ${this.auth.accessToken.access_token}`);
+                if (this.auth.rsoToken != null)
+                    modifiedReq.addHeader("X-Riot-Entitlements-JWT", this.auth.rsoToken.entitlements_token);
             }
-            return await Axios(request);
+
+            if (this.version != null)
+                modifiedReq.addHeader("X-Riot-ClientVersion", this.version);
+            modifiedReq.addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform);
+
+            return await Axios(modifiedReq.build());
         } catch (e) {
             throw e.response
                 ? new ApiClientException(e)

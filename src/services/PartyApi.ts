@@ -15,7 +15,6 @@ export class PartyApi {
         const partyReq = new RequestBuilder()
             .setUrl(this._client.region.PartyUrl + `/parties/v1/parties/${partyId}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(partyReq)).data
     }
@@ -28,7 +27,6 @@ export class PartyApi {
         const partyReq = new RequestBuilder()
             .setUrl(this._client.region.PartyUrl + `/parties/v1/players/${playerId}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(partyReq)).data
     }

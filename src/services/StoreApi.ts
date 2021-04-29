@@ -23,8 +23,6 @@ export class StoreApi {
         const walletReq = new RequestBuilder()
             .setMethod("GET")
             .setUrl(this._client.region.BaseUrl + "/store/v1/wallet/" + accountId)
-            .addHeader("content-type", "application/json")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         const walletRes = (await this._client.http.sendRequest(walletReq)).data;
 
@@ -49,7 +47,6 @@ export class StoreApi {
         const storeReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + "/store/v2/storefront/" + accountId)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         const storeRes = (await this._client.http.sendRequest(storeReq)).data;
         if (!parse)
@@ -68,7 +65,6 @@ export class StoreApi {
         const storeReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + "/store/v1/offers")
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return new IStoreOffers((await this._client.http.sendRequest(storeReq)).data);
     }

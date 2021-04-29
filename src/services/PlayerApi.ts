@@ -116,7 +116,6 @@ export class PlayerApi {
         const itemReq = new RequestBuilder()
             .setMethod("GET")
             .setUrl(this._client.region.BaseUrl + "/personalization/v2/players/" + accountId + "/playerloadout")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         const itemRes = (await this._client.http.sendRequest(itemReq)).data;
         const parser = new ItemParser(itemRes);

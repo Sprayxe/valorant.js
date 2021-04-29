@@ -15,7 +15,6 @@ export class MatchApi {
         const matchReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + `/match-details/v1/matches/${matchId}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(matchReq)).data;
     }
@@ -30,7 +29,6 @@ export class MatchApi {
         const matchReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + "/match-history/v1/history/" + accountId + `?startIndex${startIndex}&endIndex=${endIndex}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(matchReq)).data;
     }
@@ -43,7 +41,6 @@ export class MatchApi {
         const mmrReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + `/mmr/v1/players/${playerId}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(mmrReq)).data;
     }
@@ -54,11 +51,10 @@ export class MatchApi {
      * @param startIndex Index to start with
      * @param endIndex Index to end with
      */
-    async getCompetitiveHistory(accountId: string, startIndex: number, endIndex: number) {
+    async getCompetitiveHistory(accountId: string, startIndex = 0, endIndex = 10) {
         const matchReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + "/mmr/v1/players/" + accountId + `/competitiveupdates?startIndex${startIndex}&endIndex=${endIndex}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(matchReq)).data;
     }
@@ -71,7 +67,6 @@ export class MatchApi {
         const compReq = new RequestBuilder()
             .setUrl(this._client.region.BaseUrl + `/mmr/v1/leaderboards/affinity/${this._client.region.Name}/queue/competitive/season/${seasonId}`)
             .setMethod("GET")
-            .addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform)
             .build();
         return (await this._client.http.sendRequest(compReq)).data;
     }
