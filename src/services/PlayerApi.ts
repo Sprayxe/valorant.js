@@ -58,21 +58,11 @@ export class PlayerApi {
                 "response_type": "token id_token"
             })
             .build();
-        const cookieRes = await this._client.http.sendRequest(cookieReq);
-
-        // TODO: use tough-cookie
-        const cookies = [];
-        const parsedCookies = (JSON.stringify(cookieRes.headers["set-cookie"])).split("=");
-        parsedCookies.forEach(a => {
-            const cookie = a.replace("[", "").replace(";", "").replace("expires", "").replace("Max-Age", "").replace(",", "").replace("Path", "").replace("\"", "").replace("Lax\"", "").trim();
-            cookies.push(cookie)
-        })
-        const cookieAuth = `__cfduid=${cookies[1]}; did=${cookies[6]}; asid=${cookies[10]}; clid=${cookies[12]}`;
+        await this._client.http.sendRequest(cookieReq);
 
         const loginReq = new RequestBuilder()
             .setMethod("PUT")
             .setUrl(Endpoints.Auth + "/api/v1/authorization")
-            .addHeader("cookie", cookieAuth)
             .addHeader("content-type", "application/json")
             .addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36")
             .setBody({

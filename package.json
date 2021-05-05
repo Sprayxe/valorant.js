@@ -1,6 +1,6 @@
 {
   "name": "valorant.js",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "API Wrapper for valorant with oauth support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,8 +10,11 @@
   "author": "Sprayxe, Speeedyyyy",
   "license": "MIT",
   "dependencies": {
+    "@types/tough-cookie": "^4.0.0",
     "axios": "^0.21.1",
+    "axios-cookiejar-support": "^1.0.1",
     "querystring": "^0.2.1",
+    "tough-cookie": "^4.0.0",
     "typescript": "^4.2.4"
   }
 }

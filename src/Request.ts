@@ -1,10 +1,12 @@
 import { AxiosRequestConfig, Method } from "axios"
+import { CookieJar } from "tough-cookie";
 
 export class RequestBuilder {
     private _headers = {};
     private _body? = null;
     private _url = "";
     private _method: Method;
+    private _jar: CookieJar;
 
     public static fromRequest(request: Request) {
         const objMap = new Map<string, string>(Object.entries(request.headers));
@@ -36,8 +38,13 @@ export class RequestBuilder {
         return this;
     }
 
+    public setCookieJar(jar: CookieJar) {
+        this._jar = jar;
+        return this;
+    }
+
     public build(): Request {
-        return new Request(this._url, this._method, this._headers, this._body)
+        return new Request(this._url, this._method, this._headers, this._body, this._jar);
     }
 }
 
@@ -46,10 +53,13 @@ export class Request implements AxiosRequestConfig {
     method: Method
     headers: any
     data?: any
-    constructor(url: string, method: Method, headers: any, body?: any) {
+    jar?: any
+    withCredentials = true
+    constructor(url: string, method: Method, headers: any, body?: any, jar?: any) {
         this.url = url;
         this.method = method;
         this.headers = headers;
         this.data = body;
+        this.jar = jar;
     }
 }

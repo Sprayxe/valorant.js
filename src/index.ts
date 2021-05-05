@@ -11,6 +11,8 @@ import Axios, { AxiosResponse } from "axios";
 import { Request, RequestBuilder } from "./Request";
 import { Endpoints } from "./resources/Endpoints";
 import { ApiClientException } from "./models/Exceptions";
+import { CookieJar } from "tough-cookie";
+import axiosCookieJarSupport from "axios-cookiejar-support";
 
 export class RiotApiClient {
     #config: IConfig
@@ -35,6 +37,8 @@ export class RiotApiClient {
      * @param config Config for the lib
      */
     constructor(config: IConfig) {
+        if (!(config.region instanceof Region))
+            throw new Error("'Config.region' must be type of 'Region'.")
         this.http = new Http();
         this.#config = config;
         this.region = config.region;
@@ -95,9 +99,12 @@ export class RiotApiClient {
     }
 }
 
+axiosCookieJarSupport(Axios);
 export class Http extends AbstractHttp {
     private readonly auth?: IAuthorization = null;
     private readonly version?: string = null;
+    private readonly jar = new CookieJar();
+
     constructor(authorization?: IAuthorization, version?: string) {
         super();
         this.auth = authorization;
@@ -118,10 +125,11 @@ export class Http extends AbstractHttp {
                 if (this.auth.rsoToken != null)
                     modifiedReq.addHeader("X-Riot-Entitlements-JWT", this.auth.rsoToken.entitlements_token);
             }
-
             if (this.version != null)
                 modifiedReq.addHeader("X-Riot-ClientVersion", this.version);
+
             modifiedReq.addHeader("X-Riot-ClientPlatform", RiotApiClient.XRiotClientPlatform);
+            modifiedReq.setCookieJar(this.jar);
 
             return await Axios(modifiedReq.build());
         } catch (e) {
