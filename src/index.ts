@@ -156,4 +156,5 @@ export class Region {
     static EU = new Region(Endpoints.EuBase, Endpoints.EuShared, Endpoints.EuParty, "eu");
     static NA = new Region(Endpoints.NaBase, Endpoints.NaShared, Endpoints.NaParty, "na");
     static AP = new Region(Endpoints.ApBase, Endpoints.ApShared, Endpoints.ApParty, "ap");
+    static KR = new Region(Endpoints.KrBase, Endpoints.KrShared, Endpoints.KrParty, "kr")
 }
