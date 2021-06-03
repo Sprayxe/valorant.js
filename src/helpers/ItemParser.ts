@@ -154,7 +154,7 @@ export class ItemParser {
                 Guardian:'4ade7faa-4cf1-8376-95ef-39884480959b',
                 Marshal:'c4883e50-4494-202c-3ec3-6b8a9284f00b',
                 Spectre:'462080d1-4035-2937-7c09-27aa2a5c27a7',
-                Stringer:'f7e1b454-4ad4-1063-ec0a-159e56b58941',
+                Stinger:'f7e1b454-4ad4-1063-ec0a-159e56b58941',
                 Melee:'2f59173c-4bed-b6c3-2191-dea9b58be9c7',
             }
             const GunSkins = {};
