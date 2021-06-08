@@ -135,8 +135,7 @@ export class ItemParser {
             const Subject = this.data.Subject;
             const Version = this.data.Version;
             const guns = this.data.Guns;
-            const playerCard = this.data.PlayerCard;
-            const playerTitle = this.data.PlayerTitle;
+            const Identity = this.data.Identity;
             const GunIDs = {
                 Odin: '63e6c2b6-4a8e-869c-3d4c-e38355226584',
                 Ares: '55d8a0f4-4274-ca67-fe2c-06ab45efdf58',
@@ -161,11 +160,10 @@ export class ItemParser {
             for(const GunID in GunIDs)
                 GunSkins[GunID] = guns.find((gun)=> gun.ID === GunIDs[GunID]).SkinID
             const PlayerInventory = {
-                Subject: Subject,
-                Version: Version,
-                GunSkins: GunSkins,
-                PlayerCard: playerCard["ID"],
-                PlayerTitle: playerTitle["ID"]
+                Subject,
+                Version,
+                GunSkins,
+                Identity
             }
             return PlayerInventory;
         }

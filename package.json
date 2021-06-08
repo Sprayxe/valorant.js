@@ -1,6 +1,6 @@
 {
   "name": "valorant.js",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "API Wrapper for valorant with oauth support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
