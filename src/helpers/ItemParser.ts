@@ -135,8 +135,8 @@ export class ItemParser {
             const Subject = this.data.Subject;
             const Version = this.data.Version;
             const guns = this.data.Guns;
-            const playerCard = this.data.PlayerCard;
-            const playerTitle = this.data.PlayerTitle;
+            const Identity = this.data.Identity;
+            const sprays = this.data.Sprays;
             const GunIDs = {
                 Odin: '63e6c2b6-4a8e-869c-3d4c-e38355226584',
                 Ares: '55d8a0f4-4274-ca67-fe2c-06ab45efdf58',
@@ -160,12 +160,21 @@ export class ItemParser {
             const GunSkins = {};
             for(const GunID in GunIDs)
                 GunSkins[GunID] = guns.find((gun)=> gun.ID === GunIDs[GunID]).SkinID
+            const sprayIDs = {
+                PreRound: "0814b2fe-4512-60a4-5288-1fbdcec6ca48",
+                MidRound: "04af080a-4071-487b-61c0-5b9c0cfaac74",
+                PostRound: "5863985e-43ac-b05d-cb2d-139e72970014"
+            }
+            const Sprays ={}
+            for(const sprayID in sprayIDs)
+                Sprays[sprayID] = sprays.find((spray)=> spray.EquipSlotID === sprayIDs[sprayID]).SprayID
+    
             const PlayerInventory = {
-                Subject: Subject,
-                Version: Version,
-                GunSkins: GunSkins,
-                PlayerCard: playerCard["ID"],
-                PlayerTitle: playerTitle["ID"]
+                Subject,
+                Version,
+                GunSkins,
+                Sprays,
+                Identity
             }
             return PlayerInventory;
         }
