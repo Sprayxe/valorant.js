@@ -1,6 +1,6 @@
 # valorant.js
 ## An API Wrapper for valorant with oauth support
-### Warning: Currently in development!
+#### Notice: I've been working on a different project (a .pak reader written in pure js/ts) so this library may have some issues. I will still update it from time to time though so feel free to create a pr/issue :)
 
 ## Example
 ```js
